@@ -35,7 +35,6 @@
 <br> <!-- Needed since the outline of the topbar isn't counted as part of the component-->
 
 <main style = "margin-left: {main_margin_left_em}em;">
-  <VotingPage grade = {$user.grade} /> <!-- TODO: delte this once done debugging -->
 
   {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "SGA Voting App" />

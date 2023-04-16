@@ -1,4 +1,4 @@
-import { readable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 let windowHeight= 0;
 let windownWidth = 0;
 
@@ -47,7 +47,7 @@ export function updateSize() {
 window.addEventListener("resize", updateSize);
 export let sidebar_width_em = writable({
     width: 15,
-    display: "block" //TODO: change back to "none" when done debugging
+    display: "none"
 });
 
 // constants
