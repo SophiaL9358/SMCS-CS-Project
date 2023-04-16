@@ -4,33 +4,27 @@
     import GoogleAuthButton from "./lib/GoogleAuthButton.svelte";
     import Sidebar from "./lib/Sidebar.svelte";
     import Topbar from "./lib/Topbar.svelte";
-    import { sidebar_width_em, updateSize } from "./lib/colors";
+    import { onDestroy } from 'svelte';
+    import { sidebar_width_em, updateSize, user, resetUser, unsubscribe } from "./lib/constants.js";
     
-    let user = {
-      name:undefined, 
-      email:undefined, 
-      loggedIn: false, 
-      confirmed: false, 
-      reset: function() {
-        user.name = undefined;
-        user.email = undefined;
-        user.loggedIn = false;
-        user.confirmed = false;
-      }};
-    
-    const what = () => {console.log(window.innerWidth);}
 
-    $: main_margin_left_em = () => {
+    onDestroy(unsubscribe);
+
+    const what = () => {console.log(main_margin_left_em);}
+    let main_margin_left_em;
+    $: {
+      console.log(main_margin_left_em);
       if($sidebar_width_em.display == "block") {
-        return $sidebar_width_em.width;
+        main_margin_left_em =  $sidebar_width_em.width;
       } else{
-        return 0;
+        main_margin_left_em = 0;
       }
-    };
+    }
+
     // Falcon background (with dark overlay) - 
 
 </script>
-<Topbar userTopBar = {user}/>
+<Topbar />
 <Sidebar /> <!-- REMEBER TO PUT AN IF STATEMENT AROUND THIS!-->
 
 <br>
@@ -38,18 +32,19 @@
   
   <button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
   
-  {#if !user.loggedIn}
+  {#if !$user.loggedIn}
     <Title text = "SGA Voting App" />
     <Subtitle text = "Poolesville High School" />
-    <GoogleAuthButton bind:appUser = {user} />
-  {:else if user.loggedIn && !user.confirmed}
+    <GoogleAuthButton />
+  {:else if $user.loggedIn && !$user.confirmed}
     <Title text = "SGA Voting App" />
     <Subtitle text = "Poolesville High School" />
       Is this u? 
-      <br> NAME: {user.name} <br>EMAIL: {user.email}
-      <button on:click = {() => {user.reset()}}>NO!!</button> <br>
+      <br> NAME: {$user.name} <br>EMAIL: {$user.email}
+      <button on:click = {() => {resetUser();}}>NO!!</button> <br>
       <button on:click = {() => {
-        user.confirmed = true;
+        user.update(state => ({...state, confirmed: true}));
+
         sidebar_width_em.set({
             display: "block",
             width: $sidebar_width_em.width

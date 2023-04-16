@@ -1,11 +1,11 @@
 <!--START: 11;42 PM, 4/14/23, just winging it :)-->
 
 <script>
-    import { yellow_color, outline_style } from './colors.js';
-    export let userTopBar;
+    import { yellow_color, outline_style, user } from './constants';
+
     $: text = () => {
-        if (userTopBar.confirmed) {
-            return userTopBar.name;
+        if ($user.confirmed) {
+            return $user.name;
         } else {
             return "Login";
         }

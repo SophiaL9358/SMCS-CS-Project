@@ -1,6 +1,7 @@
 <!-- dsfkldjf-->
 <script>
-    export let appUser;
+    import { user } from './constants';
+
     function decodeJwtResponse(token) {
         let base64Url = token.split('.')[1]
         let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -14,10 +15,12 @@
     globalThis.handleCredentialResponse = (response) => {
       console.log('START');
       responsePayload = decodeJwtResponse(response.credential);
-
-        appUser.email = responsePayload.email;
-        appUser.name = responsePayload.name;
-        appUser.loggedIn = true;
+        
+        user.update(state => ({...state, 
+            email: responsePayload.email,
+            name: responsePayload.name,
+            loggedIn: true
+        }));
 
         console.log("ID: " + responsePayload.sub);
         console.log('Full Name: ' + responsePayload.name);

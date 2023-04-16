@@ -1,5 +1,5 @@
 <script>
-    import { yellow_color } from "../colors";
+    import { yellow_color } from "../constants";
     export let text;
 </script>
 
