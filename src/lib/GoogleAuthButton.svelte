@@ -2,6 +2,7 @@
 <script>
     import { user } from './constants';
 
+    // Decode the information given by google
     function decodeJwtResponse(token) {
         let base64Url = token.split('.')[1]
         let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -11,6 +12,7 @@
         return JSON.parse(jsonPayload)
     }
 
+    // Function to update user information and log the user information
     let responsePayload;
     globalThis.handleCredentialResponse = (response) => {
       console.log('START');
@@ -19,7 +21,8 @@
         user.update(state => ({...state, 
             email: responsePayload.email,
             name: responsePayload.name,
-            loggedIn: true
+            loggedIn: true,
+            grade: 2025 // TODO: Assigns grade based on database
         }));
 
         console.log("ID: " + responsePayload.sub);
@@ -31,6 +34,7 @@
     }
 </script>
 
+<!-- Google Auth code (ctrl c + v)-->
 <svelte:head>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </svelte:head>
@@ -38,18 +42,21 @@
     data-client_id="341767156528-fs4h69iujkab2cu04tvrr0jeafb3gk2o.apps.googleusercontent.com"
     data-callback= "handleCredentialResponse">
 </div>
-<div id = "container_google">
-    <div class="g_id_signin" data-type="standard"></div>
+<div class = "parent_container">
+    <div class="g_id_signin" data-type="standard">
+        No Internet Connection <!-- If the button doesn't show (due to no internet)-->
+    </div>  
 </div>
 
 <style>
-    #container_google {
+    /* For centering the google sign in button */
+    .parent_container {  
         display: flex;
         width: 100%;
         justify-content: center;
     }
     .g_id_signin {
-        margin-top: 45vh;
+        margin-top: 35vh;
         padding-bottom: 2em;
     }
     

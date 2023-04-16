@@ -18,14 +18,14 @@
         position: sticky;
         top: 0;
         width: inherit;
-        height: 4em;
+        height: 3em;
         background-color: black;
         
         text-align: right;
         
         
         outline-style: solid;
-        padding: 2em 2em 0em 2em;
+        padding: 1.5em 2em 0em 2em;
     }
     
 </style>

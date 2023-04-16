@@ -6,31 +6,32 @@
     import Topbar from "./lib/Topbar.svelte";
     import { onDestroy } from 'svelte';
     import { sidebar_width_em, updateSize, user, resetUser, unsubscribe } from "./lib/constants.js";
+    import VotingPage from "./lib/voting/VotingPage.svelte";
     
-
     onDestroy(unsubscribe);
 
     const what = () => {console.log(main_margin_left_em);}
+
+    let onWholeSchool = false;
+
+    // To set the margin left for the main component
     let main_margin_left_em;
-    $: {
-      console.log(main_margin_left_em);
-      if($sidebar_width_em.display == "block") {
+    $: {if($sidebar_width_em.display == "block") {
         main_margin_left_em =  $sidebar_width_em.width;
       } else{
         main_margin_left_em = 0;
       }
     }
 
-    // Falcon background (with dark overlay) - 
-
 </script>
 <Topbar />
 <Sidebar /> <!-- REMEBER TO PUT AN IF STATEMENT AROUND THIS!-->
+<br> <!-- Needed since the outline of the topbar isn't counted as part of the component-->
 
-<br>
-<main style = "background-color: purple; margin-left: {main_margin_left_em}em;">
+<main style = "margin-left: {main_margin_left_em}em;">
   
-  <button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
+  <VotingPage grade = {$user.grade} /> <!-- TODO: delte this once done debugging -->
+
   
   {#if !$user.loggedIn}
     <Title text = "SGA Voting App" />
@@ -53,10 +54,15 @@
         }
         }
         >YES!!</button>
+  {:else if !onWholeSchool}
+      <VotingPage grade = {$user.grade} />
+  {:else if onWholeSchool} <!--  -->
+  <VotingPage grade = "Whole School" />
   {:else}
-    LOGGED IN!
+        Something went wrong :/
   {/if}
   
-  
+  <!----<button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
+
 </main>
 

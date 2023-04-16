@@ -1,8 +1,8 @@
 <script>
-    import { yellow_color } from "../constants";
+    import { yellow_color, subtitle_size_em } from "../constants";
     export let text;
 </script>
 
-<h1 style = "color: {yellow_color}; font-size: 2em;">
+<h2 style = "color: {yellow_color}; font-size: {subtitle_size_em}em;">
     {text}
-</h1>
+</h2>
