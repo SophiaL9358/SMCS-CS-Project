@@ -2,14 +2,6 @@
     import { yellow_color, outline_width_em, outline_style, sidebar_width_em } from './constants';
 </script>
 
-<style>
-    #sidebar {
-        position: fixed;
-        height: 100%;
-        
-        background-color: black;
-    }
-</style>
 
 <!--
     - Outline is yellow
@@ -20,3 +12,12 @@
 
     sdfsd
 </div>
+
+<style>
+    #sidebar {
+        position: fixed;
+        height: 100%;
+        
+        background-color: black;
+    }
+</style>

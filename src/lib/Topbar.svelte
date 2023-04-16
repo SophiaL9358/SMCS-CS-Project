@@ -3,6 +3,7 @@
 <script>
     import { yellow_color, outline_style, user } from './constants';
 
+    // Setting "Login" text
     $: text = () => {
         if ($user.confirmed) {
             return $user.name;
@@ -12,6 +13,12 @@
     };
 
 </script>
+
+<div style = {outline_style} id = "box"> <!-- Topbar -->
+    <div style = "color: {yellow_color}" id = "name"> <!-- Text -->
+        {text()}
+    </div>
+</div>
 
 <style>
     #box {
@@ -23,17 +30,8 @@
         
         text-align: right;
         
-        
         outline-style: solid;
         padding: 1.5em 2em 0em 2em;
     }
     
 </style>
-
-<div style = {outline_style} id = "box">
-    <div style = "color: {yellow_color}" id = "name">
-        {text()}
-    </div>
-</div>
-
-
