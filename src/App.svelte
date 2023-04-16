@@ -1,6 +1,7 @@
 <script>
-
+    import Sidebar from "./lib/Sidebar.svelte";
     import Topbar from "./lib/Topbar.svelte";
+    
     let user = {
       name:undefined, 
       email:undefined, 
@@ -28,9 +29,7 @@
     let responsePayload;
     globalThis.handleCredentialResponse = (response) => {
       console.log('START');
-        // decodeJwtResponse() is a custom function defined by you
-        // to decode the credential response.
-        responsePayload = decodeJwtResponse(response.credential);
+      responsePayload = decodeJwtResponse(response.credential);
 
         user.email = responsePayload.email;
         user.name = responsePayload.name;
@@ -45,14 +44,16 @@
     }
 
 
-    // Falcon background (with dark overlay) - https://docs.google.com/drawings/d/16JuH09ZYbeDR4LBjZoEbvoiM2lshXa-_ZnOYh9YSilk/edit?usp=sharing
+    // Falcon background (with dark overlay) - 
 
 </script>
-
 <Topbar userTopBar = {user}/>
+<Sidebar /> <!-- REMEBER TO PUT AN IF STATEMENT AROUND THIS!-->
+
 <br>
 <main>
-  <button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
+  
+  <!--<button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
   <br>
   {#if !user.loggedIn}
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -60,7 +61,9 @@
         data-client_id="341767156528-fs4h69iujkab2cu04tvrr0jeafb3gk2o.apps.googleusercontent.com"
         data-callback= "handleCredentialResponse">
     </div>
-    <div class="g_id_signin" data-type="standard"></div>
+    <div id = "container_google">
+      <div class="g_id_signin" data-type="standard"></div>
+    </div>
   {:else if user.loggedIn && !user.confirmed}
       Is this u? 
       <br>
@@ -70,24 +73,21 @@
       <button on:click = {() => {user.reset()}}>NO!!</button>
       <button on:click = {() => {user.confirmed = true}}>YES!!</button>
   {:else}
-    LOGGED IN AS {user.name}
+    LOGGED IN!
   {/if}
-
+  
+  
 </main>
 <style>
-  .g_id_signin {
-      position: absolute;
-      background-color: purple;
-      
-      bottom: 5em;
-      left: 45%;
-      right: auto;
-
-      height: 10em;
-      margin-left:auto;
-      margin-right: auto;
-      display:block;
+  #container_google {
+    display: flex;
+    width: 100%;
+    justify-content: center;
   }
+  .g_id_signin {
+    margin-top: 60vh;
+  }
+  
 </style>
 
 <!--
