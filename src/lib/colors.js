@@ -1,0 +1,1 @@
+export const yellow_color = "rgba(255, 218, 26, 1)";
