@@ -24,7 +24,7 @@ export const unsubscribe = user.subscribe(value => {
     confirmedValue = value.confirmed;
 });
 
-
+// sidebar
 export function updateSize() {
     windowHeight = window.innerHeight;
     windownWidth = window.innerWidth;
