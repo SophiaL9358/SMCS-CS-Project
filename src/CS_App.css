@@ -3,7 +3,7 @@ body {
     text-align: center;
 
     background-color: black;
-    background-image: url('falcon_bg_black_overlay.png');    
+    background-image: url('./assets/falcon_bg_black_overlay.png');    
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
