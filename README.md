@@ -1,3 +1,9 @@
+cs proj
+interesting thing
+pls no judge
+cause...
+it not great
+
 # Svelte + Vite
 
 This template should help get you started developing with Svelte in Vite.
