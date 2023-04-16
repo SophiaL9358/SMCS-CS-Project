@@ -4,7 +4,7 @@
     import GoogleAuthButton from "./lib/GoogleAuthButton.svelte";
     import Sidebar from "./lib/Sidebar.svelte";
     import Topbar from "./lib/Topbar.svelte";
-    import { sidebar_width_em } from "./lib/colors";
+    import { sidebar_width_em, updateSize } from "./lib/colors";
     
     let user = {
       name:undefined, 
@@ -19,7 +19,14 @@
       }};
     
     const what = () => {console.log(window.innerWidth);}
-    $: main_margin_left_em = ($sidebar_width_em.display == "block") && $sidebar_width_em.width;
+
+    $: main_margin_left_em = () => {
+      if($sidebar_width_em.display == "block") {
+        return $sidebar_width_em.width;
+      } else{
+        return 0;
+      }
+    };
     // Falcon background (with dark overlay) - 
 
 </script>
@@ -41,7 +48,16 @@
       Is this u? 
       <br> NAME: {user.name} <br>EMAIL: {user.email}
       <button on:click = {() => {user.reset()}}>NO!!</button> <br>
-      <button on:click = {() => {user.confirmed = true}}>YES!!</button>
+      <button on:click = {() => {
+        user.confirmed = true;
+        sidebar_width_em.set({
+            display: "block",
+            width: $sidebar_width_em.width
+          });
+        updateSize();
+        }
+        }
+        >YES!!</button>
   {:else}
     LOGGED IN!
   {/if}
@@ -49,9 +65,3 @@
   
 </main>
 
-
-<!--
-
-  "You have created a new client application that uses libraries for user authentication or authorization that will soon be deprecated. New clients must use the new libraries instead; existing clients must also migrate before these libraries are deprecated. See the [Migration Guide](https://developers.google.com/identity/gsi/web/guides/gis-migration) for more information."
-
--->

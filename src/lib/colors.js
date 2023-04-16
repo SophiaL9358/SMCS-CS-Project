@@ -3,7 +3,7 @@ import { readable, writable } from 'svelte/store';
 let windowHeight= 0;
 let windownWidth = 0;
 
-function updateSize() {
+export function updateSize() {
     windowHeight = window.innerHeight;
     windownWidth = window.innerWidth;
     console.log(windownWidth);
