@@ -1,4 +1,6 @@
 <script>
+    import Subtitle from "./lib/General/Subtitle.svelte";
+    import Title from "./lib/General/Title.svelte";
     import GoogleAuthButton from "./lib/GoogleAuthButton.svelte";
 import Sidebar from "./lib/Sidebar.svelte";
     import Topbar from "./lib/Topbar.svelte";
@@ -27,16 +29,15 @@ import Sidebar from "./lib/Sidebar.svelte";
 <main>
   
   <!--<button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
-  <br>
+  
   {#if !user.loggedIn}
+    <Title text = "SGA Voting App" />
+    <Subtitle text = "Poolesville High School" />
     <GoogleAuthButton bind:appUser = {user} />
   {:else if user.loggedIn && !user.confirmed}
       Is this u? 
-      <br>
-      NAME: {user.name}
-      <br>
-      EMAIL: {user.email}
-      <button on:click = {() => {user.reset()}}>NO!!</button>
+      <br> NAME: {user.name} <br>EMAIL: {user.email}
+      <button on:click = {() => {user.reset()}}>NO!!</button> <br>
       <button on:click = {() => {user.confirmed = true}}>YES!!</button>
   {:else}
     LOGGED IN!

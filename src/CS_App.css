@@ -1,6 +1,7 @@
 body {
     margin: 0;
     text-align: center;
+    font-family:  Georgia, 'Times New Roman', Times, serif; 
 
     background-color: black;
     background-image: url('./assets/falcon_bg_black_overlay.png');    
