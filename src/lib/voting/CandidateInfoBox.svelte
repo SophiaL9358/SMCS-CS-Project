@@ -1,7 +1,7 @@
 <script>
     export let candidate = {
         name: "First Last",
-        video: "https://drive.google.com/file/d/13R1MQjMNP0gJHvmVu4mwASH-jsqa3dVE/preview",
+        video: "https://drive.google.com/file/d/13R1MQjMNP0gJHvmVu4mwASH-jsqa3dVE/preview", // ensure this has preview!
         platform: "Platform 1\nPlatform 2\nPlatform 3"
     }
 </script>

@@ -54,6 +54,8 @@ export let sidebar_width_em = writable({
 export const title_size_em = 3;
 export const subtitle_size_em = 1.5;
 export const yellow_color = "rgba(255, 218, 26, 1)";
+export const red_color = "rgb(248, 72, 72)";
+export const green_color = "rgb(101, 255, 144)"
 export const outline_width_em = 0.3;
 export const outline_style = "outline-color:"  + yellow_color + ";" +
                              "outline-width: " + outline_width_em+"em;"+

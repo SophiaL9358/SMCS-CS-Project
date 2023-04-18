@@ -6,7 +6,7 @@
   import Sidebar from "./lib/Sidebar.svelte";
   import Topbar from "./lib/Topbar.svelte";
   import { onDestroy } from 'svelte';
-  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe } from "./lib/constants.js";
+  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
   import VotingPage from "./lib/voting/VotingPage.svelte";
   
   // From store of constants.js, need to destroy it to prevent memory leaks
@@ -45,8 +45,8 @@
     <Subtitle text = "Poolesville High School" />
       Is this u? 
       <br> NAME: {$user.name} <br>EMAIL: {$user.email}
-      <button on:click = {() => {resetUser();}}>NO!!</button> <br>
-      <button on:click = {() => {
+      <button style = "background-color: {red_color};" on:click = {() => {resetUser();}}>NO!!</button> <br>
+      <button style = "background-color: {green_color};" on:click = {() => {
         user.update(state => ({...state, confirmed: true}));
 
         sidebar_width_em.set({
@@ -68,4 +68,3 @@
   <!----<button on:click = {what}>debug button</button><!-- DEBUG: To show that console works -->
 
 </main>
-
