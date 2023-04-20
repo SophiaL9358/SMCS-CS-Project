@@ -8,7 +8,7 @@
 <div class = "parent_container">
 <div id = "box">
     <h3>{candidate.name}</h3> <br>
-    <iframe title = "candidate video" src = "{candidate.video}" height = "480" width = "640"></iframe>
+    <iframe title = "candidate video" src = "{candidate.video}" width = "100%"></iframe>
 </div>
 </div>
 <br><br>

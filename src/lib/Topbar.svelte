@@ -16,7 +16,6 @@
 </script>
 
 <div style = {outline_style} id = "box"> <!-- Topbar -->
-    <img src = '../teco_logo.png' alt = "TechTonic Corporations Logo" />
     <div style = "color: {yellow_color}"> <!-- Text -->
         {text()}
     </div>

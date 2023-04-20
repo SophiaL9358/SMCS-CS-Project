@@ -29,7 +29,7 @@ export const unsubscribe = user.subscribe(value => {
 export function updateSize() {
     windowHeight = window.innerHeight;
     windownWidth = window.innerWidth;
-
+    console.log('doing something'); // TODO: why?? (works with this?)
     if (confirmedValue) {
         if (windownWidth < 800){
             sidebar_width_em.set({
