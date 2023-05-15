@@ -11,6 +11,10 @@ export function resetUser() {
         confirmed: false,
         grade: undefined
     });
+    sidebar_width_em.set({
+        width: 15,
+        display: "none"
+    });
 }
 export let user = writable({
     confirmed: false,

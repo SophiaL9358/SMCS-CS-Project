@@ -27,7 +27,7 @@
     }
   }
 
-  // If user leaves
+  // If user leaves, reset their information
   $: if ($user.loggedIn){
     window.onbeforeunload = resetUser;
   }
