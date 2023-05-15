@@ -13,10 +13,9 @@
     }
 
     // Function to update user information and log the user information
-    let responsePayload;
     globalThis.handleCredentialResponse = (response) => {
       console.log('START');
-      responsePayload = decodeJwtResponse(response.credential);
+      let responsePayload = decodeJwtResponse(response.credential);
         
         user.update(state => ({...state, 
             email: responsePayload.email,

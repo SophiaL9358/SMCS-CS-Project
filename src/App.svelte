@@ -27,6 +27,11 @@
     }
   }
 
+  // If user leaves
+  $: if ($user.loggedIn){
+    window.onbeforeunload = resetUser;
+  }
+
 </script>
 
 <!-- Bars -->
