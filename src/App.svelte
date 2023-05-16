@@ -7,7 +7,7 @@
   import Topbar from "./lib/Topbar.svelte";
   import { onDestroy } from 'svelte';
   import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
-  import VotingPage from "./lib/voting/VotingPage.svelte";
+  import Grade10VotingPage from "./lib/voting/Grade10VotingPage.svelte";
   
   // From store of constants.js, need to destroy it to prevent memory leaks
   onDestroy(unsubscribe);
@@ -17,7 +17,15 @@
 
   // Keep track of what page the user is one (false is default)
   let onWholeSchool = false;
-
+  
+  // TODO: TESTING ONLY, DELETE AFTER TESTING
+  /*user.set({
+        name:"Julia Kolotev", 
+        email:"uwu@gmail.com", 
+        loggedIn: true, 
+        confirmed: true,
+        grade: 10
+    }); //*/
   // To set the margin left for the main component
   let main_margin_left_em;
   $: {if($sidebar_width_em.display == "block") {
@@ -63,9 +71,9 @@
         }
         >YES!!</button>
   {:else if !onWholeSchool} <!-- GRADE VOTING page -->
-      <VotingPage grade = {$user.grade} />
+      <Grade10VotingPage />
   {:else if onWholeSchool}  <!-- WHOLE SCHOOL VOTING page -->
-  <VotingPage grade = "Whole School" />
+  <Grade10VotingPage />
   {:else}  <!-- SADNESS page -->
         Something went wrong :/
   {/if}

@@ -3,18 +3,9 @@
     import { user } from "../constants";
     import Title from "../General/Title.svelte";
 
-    export let grade;
-
-    function determineTitle () {
-        if (grade == "Whole School") {
-            return "Whole School";
-        } else {
-            return "Class of " + grade;
-        }
-    }
 
 </script>
-<Title text = {determineTitle()} />
+<Title text = "Rising 10th Grade Voting" />
 
     <PositionBoxes position = "President" /><br>
     <PositionBoxes position = "Vice President" /><br>
