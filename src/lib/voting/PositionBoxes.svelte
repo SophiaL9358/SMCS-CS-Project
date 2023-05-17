@@ -8,6 +8,8 @@
         platform: "hi"
     };
 
+    let introLink = "https://drive.google.com/uc?export=view&id=";
+
     //https://drive.google.com/file/d/1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ/view?usp=sharing
 </script>
 <Subtitle text = {position} />
@@ -18,13 +20,13 @@ platform:["Loves dogs, will eat carrots all day, lane 7",
     "i can do this all dayyyyyyyyyyyyy back it up back it up"]
 }}/>
 <CandidateInfoBox candidate ={{name: "Victoria Mo",
-video: "https://drive.google.com/uc?export=view&id=1S-DRHJqIzDytKcbRrojaYbcMF3APvuNA",
+video: introLink+"1S-DRHJqIzDytKcbRrojaYbcMF3APvuNA",
 platform:["the moes of the mosey mo most moey mose muse moo", 
     "boom boom boom boom boom boom boom boom boom boom boom boom boom", 
     "art bart"]
 }}/> 
 <CandidateInfoBox candidate ={{name: "Veronica Wang",
-video: "https://drive.google.com/uc?export=view&id=1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ",
+video: introLink+"1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ",
 platform:["weef wof woooaf fwaf wofow waoofwoafwoefwjeowfwfo wfwoajfowjfa", 
     "ap art omg? !E?!@#@!$ 48ufdksljsf", 
     "south sudan is such a good country def go there lol ehehhehe"]

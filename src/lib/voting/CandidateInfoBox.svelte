@@ -14,8 +14,8 @@
                 src="{candidate.video}" id = "video"/>
 
             <div id = "platform"> 
-                <p >{candidate.platform[0]}</p> <br>
-                <p >{candidate.platform[1]}</p><br>
+                <p >{candidate.platform[0]}</p>
+                <p >{candidate.platform[1]}</p>
                 <p >{candidate.platform[2]}</p>
                 
             </div>
