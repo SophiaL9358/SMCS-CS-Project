@@ -11,11 +11,15 @@
 -->
 <div id = "sidebar" 
     style = "{outline_style} color: {yellow_color}; margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em; display: {$sidebar_width_em.display};">
-    {title}
+    <div style = "margin-bottom: 3em;">
+        {title}
+    </div>
+    <div id = "scroll_container">
     <div class = "positions">
         <SidebarBox position = "President" />
         <SidebarBox position = "Vice President" />
         <SidebarBox position = "Secretary" />
+        <SidebarBox position = "Treasurer" />
         <SidebarBox position = "Treasurer" />
         <SidebarBox position = "Treasurer" />
         <SidebarBox position = "Treasurer" />
@@ -24,22 +28,27 @@
          <!---->
     </div>
 </div>
+</div>
 
 <style>
     #sidebar {
         position: fixed;
-        height: 100%;
         padding-top: 1em;
-        
+        height: 100%;
         background-color: black;
+        
+    }
+    #scroll_container {
+        position: relative;
+        height: inherit;
+        height: 70%;
         overflow-y: scroll;
         overflow-x:hidden;
     }
-    .positions {
-        margin-top: 3em;
-        height: inherit;
+    .positions { /* mostly for debugging*/
+        background-color: black;
     }
-    #sidebar::-webkit-scrollbar{
+    #scroll_container::-webkit-scrollbar{
     display: none;
   }
 </style>

@@ -18,7 +18,6 @@
 <style>
 
     .parent_container {
-        position: relative;
         padding: 1em 0em 1em 0em;
         color: white;
         display: block;
