@@ -55,7 +55,6 @@
         justify-content: center;
     }
     .g_id_signin {
-        margin-top: 35vh;
         padding-bottom: 2em;
     }
     

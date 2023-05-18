@@ -49,28 +49,12 @@
 <br> <!-- Needed since the outline of the topbar isn't counted as part of the component-->
 
 <main style = "margin-left: {main_margin_left_em}em;">
-  <!-- TODO: delete this, only for mcps ids -->
-  <button style = "background-color: {green_color};" on:click = {() => {
-    user.update(state => ({...state, 
-            email: "owowow",
-            name: "Hacker wow",
-            loggedIn: true,
-            grade: 2025 // TODO: Assigns grade based on database
-        }));
-
-    sidebar_width_em.set({
-        display: "block",
-        width: $sidebar_width_em.width
-      });
-    updateSize();
-    }
-    }
-    >get in anwaysy!!</button>
-
   {#if !$user.loggedIn} <!-- LOGIN page -->
-    <Title text = "SGA Voting App" />
-    <Subtitle text = "Poolesville High School" />
+    <Title text = "Pooleville HS - SGA Voting" />
+    <Subtitle text = "Student Sign In" />
     <SignIn />
+    
+    <Subtitle text = "Teacher Sign In" />
     <GoogleAuthButton />
   {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page -->
     <Title text = "SGA Voting App" />
