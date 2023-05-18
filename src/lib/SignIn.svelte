@@ -10,9 +10,7 @@
         warning = "Processing...";
         try {
             let response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
-            console.log("user exists!");
             
-            console.log(response.studentInfo().then());
             user.update(state => ({...state, 
                 email: idInput.value + "@mcpsmd.net",
                 name: idInput.value,
@@ -31,7 +29,6 @@
             });
             updateSize();
         } catch {
-            console.log("user doesn't exist!");
             warning = "Username or Password is incorrect!";
         }
     }
