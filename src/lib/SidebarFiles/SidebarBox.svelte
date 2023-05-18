@@ -24,6 +24,7 @@
         width: 100%;
         justify-content: center;
         transition: 0.25s;
+        background-color: rgb(66, 66, 66);
 
     }
     .parent_container:hover {

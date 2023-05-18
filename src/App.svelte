@@ -8,6 +8,7 @@
   import { onDestroy } from 'svelte';
   import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
   import Grade10VotingPage from "./lib/voting/Grade10VotingPage.svelte";
+    import SignIn from "./lib/SignIn.svelte";
   
   // From store of constants.js, need to destroy it to prevent memory leaks
   onDestroy(unsubscribe);
@@ -69,6 +70,7 @@
   {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "SGA Voting App" />
     <Subtitle text = "Poolesville High School" />
+    <SignIn />
     <GoogleAuthButton />
   {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page -->
     <Title text = "SGA Voting App" />
