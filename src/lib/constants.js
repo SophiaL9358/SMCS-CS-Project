@@ -24,7 +24,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 export async function getSomeList() {
-    const citiesCol = doc(db, 'PHS IDs/10001890');
+    const citiesCol = doc(db, 'PHS IDs/420420');
     console.log("start");
     const smth = getDoc(citiesCol);
     console.log((await smth).data());
