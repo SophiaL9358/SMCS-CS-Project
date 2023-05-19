@@ -1,4 +1,42 @@
 import { writable } from 'svelte/store';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyA7OGMwN2GwdTbFhvP_H5Ndx8ZpW2admck",
+  authDomain: "sga-voting-app.firebaseapp.com",
+  projectId: "sga-voting-app",
+  storageBucket: "sga-voting-app.appspot.com",
+  messagingSenderId: "553750076505",
+  appId: "1:553750076505:web:6e63fc269c884a21aee548",
+  measurementId: "G-7XYJE30TY4"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
+export async function getSomeList() {
+    const citiesCol = doc(db, 'PHS IDs/10001890');
+    console.log("start");
+    const smth = getDoc(citiesCol);
+    console.log((await smth).data());
+    let cityList = "filler";
+    /*
+    const citySnapshot = await getDocs(citiesCol);
+    const cityList = citySnapshot.docs.map(doc => doc.data());*/
+    console.log("end");
+    console.log(cityList);
+    return cityList;
+  }
+
 let windowHeight= 0;
 let windownWidth = 0;
 

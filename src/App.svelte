@@ -6,10 +6,11 @@
   import Sidebar from "./lib/SidebarFiles/Sidebar.svelte";
   import Topbar from "./lib/Topbar.svelte";
   import { onDestroy } from 'svelte';
-  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
+  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color, getSomeList } from "./lib/constants.js";
   import Grade10VotingPage from "./lib/voting/Grade10VotingPage.svelte";
     import SignIn from "./lib/SignIn.svelte";
-  
+  let test;
+  $: test = getSomeList();
   // From store of constants.js, need to destroy it to prevent memory leaks
   onDestroy(unsubscribe);
 
@@ -42,12 +43,11 @@
   }
 
 </script>
-
+{test}
 <!-- Bars -->
 <Topbar />
 <Sidebar />
 <br> <!-- Needed since the outline of the topbar isn't counted as part of the component-->
-
 <main style = "margin-left: {main_margin_left_em}em;">
   {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "Pooleville HS - SGA Voting" />
