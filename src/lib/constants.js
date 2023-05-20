@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
-// Import the functions you need from the SDKs you need
+
+// Firebase imports
 import { initializeApp } from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
@@ -18,7 +19,7 @@ const firebaseConfig = {
   measurementId: "G-7XYJE30TY4"
 };
 
-// Initialize Firebase
+// Initialize Firebase - spaghetti code currently
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
@@ -37,11 +38,8 @@ export async function getSomeList() {
     return cityList;
   }
 
-let windowHeight= 0;
-let windownWidth = 0;
-
-// user
-export function resetUser() {
+// USER RELATED FUNCTIONS
+export function resetUser() { // Resets user and sidebar - returns user to homepage
     user.set({
         name:undefined, 
         email:undefined, 
@@ -54,6 +52,7 @@ export function resetUser() {
         display: "none"
     });
 }
+// user object
 export let user = writable({
     confirmed: false,
     name:undefined, 
@@ -62,18 +61,24 @@ export let user = writable({
     grade: undefined
 });
 
+/*  Need to sumbsribe confirmedValue to the value of the user's, 
+    since $user.confirmed doesn't work in JS files :|
+    Must be destroyed in a svelte file, so it's exported and destroye in App.svelte
+*/
 let confirmedValue;
 export const unsubscribe = user.subscribe(value => {
     confirmedValue = value.confirmed;
 });
 
-// sidebar
+// Updating visibility of sidebar based on the window size
+let windowHeight= 0;
+let windowWidth = 0;
+
 export function updateSize() {
     windowHeight = window.innerHeight;
-    windownWidth = window.innerWidth;
-    console.log('doing something'); // TODO: why?? (works with this?)
+    windowWidth = window.innerWidth;
     if (confirmedValue) {
-        if (windownWidth < 800){
+        if (windowWidth < 800){ // Hide sidebar if 
             sidebar_width_em.set({
                 width: 0,
                 display: "none"

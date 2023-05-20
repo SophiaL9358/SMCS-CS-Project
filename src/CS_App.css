@@ -14,7 +14,18 @@ body {
 }
 
 button {
-    width: 7em;
-    height: 4em;
-    font-weight: bold;
-  }
+  width: 7em;
+  height: 3em;
+  font-weight: bold;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.prompt {
+  opacity: 70%;
+  background-color: white;
+  width: 40%;
+  padding: 1em 0 1em 0;
+}

@@ -1,5 +1,5 @@
 <script>
-    import { yellow_color, outline_width_em, outline_style, sidebar_width_em } from '../constants';
+    import { yellow_color, outline_width_em, outline_style, sidebar_width_em } from '../constants.js';
     export let position = "NONE";
     export let candidate = "No Candidate Chosen";
 </script>

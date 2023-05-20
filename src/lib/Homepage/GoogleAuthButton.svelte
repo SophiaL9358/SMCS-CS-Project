@@ -1,6 +1,5 @@
-<!-- dsfkldjf-->
 <script>
-    import { user } from './constants';
+    import { user } from '../constants.js';
 
     // Decode the information given by google
     function decodeJwtResponse(token) {
@@ -23,20 +22,14 @@
             loggedIn: true,
             grade: 2025 // TODO: Assigns grade based on database
         }));
-
-        console.log("ID: " + responsePayload.sub);
-        console.log('Full Name: ' + responsePayload.name);
-        console.log('Given Name: ' + responsePayload.given_name);
-        console.log('Family Name: ' + responsePayload.family_name);
-        console.log("Image URL: " + responsePayload.picture);
-        console.log("Email: " + responsePayload.email);
     }
 </script>
 
-<!-- Google Auth code (ctrl c + v)-->
+<!-- Google Auth Script-->
 <svelte:head>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </svelte:head>
+
 <div id="g_id_onload"
     data-client_id="341767156528-fs4h69iujkab2cu04tvrr0jeafb3gk2o.apps.googleusercontent.com"
     data-callback= "handleCredentialResponse">

@@ -1,5 +1,5 @@
 <script>
-    import { yellow_color, title_size_em } from "../constants";
+    import { yellow_color, title_size_em } from "../constants.js";
     export let text;
 </script>
 

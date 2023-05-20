@@ -1,6 +1,6 @@
 <script>
     import PositionBoxes from "./PositionBoxes.svelte";
-    import { user } from "../constants";
+    import { user } from "../constants.js";
     import Title from "../General/Title.svelte";
 
 
