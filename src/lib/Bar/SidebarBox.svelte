@@ -1,11 +1,24 @@
 <script>
-    import { yellow_color, outline_width_em, outline_style, sidebar_width_em } from '../constants.js';
+    import { yellow_color, outline_width_em, outline_style, sidebar_width_em, user } from '../constants.js';
     export let position = "NONE";
     export let candidate = "No Candidate Chosen";
+
+    let box;
+    $: if (box && $user.officerOn == position){
+        box.style.backgroundColor = yellow_color;
+        box.style.color = "black";
+    } else if (box) {
+        box.style.backgroundColor = "black";
+        box.style.color = "white";
+    }
+
+    function handleClick (){
+        user.update(state => ({...state, officerOn: position}));
+    }
 </script>
 
-
-<div class = "parent_container" 
+<a href = "#{position}" on:click = {handleClick}>
+<div bind:this = {box} class = "parent_container" 
     style = "{outline_style} margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em;">
     <div>
         {position}
@@ -14,7 +27,7 @@
         <i style = "font-size: 0.9em;">{candidate}</i>
     </div>
 </div>
-
+</a>
 <style>
 
     .parent_container {
@@ -29,6 +42,7 @@
     }
     .parent_container:hover {
         color: black !important;
-        background-color: rgba(255, 218, 26, 1);
+        background-color: rgba(255, 218, 26, 1) !important;
+        cursor: pointer;
     }
 </style>

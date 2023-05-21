@@ -17,12 +17,13 @@
   let onWholeSchool = false;
   
   // TODO: TESTING ONLY, DELETE AFTER TESTING
-  /*user.set({
+  user.set({
         name:"Julia Kolotev", 
         email:"uwu@gmail.com", 
         loggedIn: true, 
         confirmed: true,
-        grade: 10
+        grade: 10,
+        officerOn: "President"
     }); //*/
     
   // To set the margin left for the main component depending on the visibility of the sidebar

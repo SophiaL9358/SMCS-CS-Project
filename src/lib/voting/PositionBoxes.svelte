@@ -12,6 +12,7 @@
 
     //https://drive.google.com/file/d/1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ/view?usp=sharing
 </script>
+<div id = {position}></div>
 <Subtitle text = {position} />
 <CandidateInfoBox candidate ={{name: "Julia Kolotev",
 video: "https://www.youtube.com/embed/IA9lteWEQ44",
@@ -31,5 +32,3 @@ platform:["weef wof woooaf fwaf wofow waoofwoafwoefwjeowfwfo wfwoajfowjfa",
     "ap art omg? !E?!@#@!$ 48ufdksljsf", 
     "south sudan is such a good country def go there lol ehehhehe"]
 }}/>
-
-<br>

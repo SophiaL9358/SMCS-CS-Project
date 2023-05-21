@@ -10,15 +10,15 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA7OGMwN2GwdTbFhvP_H5Ndx8ZpW2admck",
-  authDomain: "sga-voting-app.firebaseapp.com",
-  projectId: "sga-voting-app",
-  storageBucket: "sga-voting-app.appspot.com",
-  messagingSenderId: "553750076505",
-  appId: "1:553750076505:web:6e63fc269c884a21aee548",
-  measurementId: "G-7XYJE30TY4"
-};
-
+    apiKey: "AIzaSyB15p3EEpBfzKg9p3TP7wW71Fu0vjVu3OU",
+    authDomain: "cs-pr-383805.firebaseapp.com",
+    projectId: "cs-pr-383805",
+    storageBucket: "cs-pr-383805.appspot.com",
+    messagingSenderId: "341767156528",
+    appId: "1:341767156528:web:c849be289b33e456994ef5"
+  };
+  
+  // Initialize Firebase
 // Initialize Firebase - spaghetti code currently
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -45,7 +45,8 @@ export function resetUser() { // Resets user and sidebar - returns user to homep
         email:undefined, 
         loggedIn: false, 
         confirmed: false,
-        grade: undefined
+        grade: undefined,
+        officerOn: undefined
     });
     sidebar_width_em.set({
         width: 15,
@@ -58,7 +59,8 @@ export let user = writable({
     name:undefined, 
     email:undefined, 
     loggedIn: false,
-    grade: undefined
+    grade: undefined,
+    officerOn: undefined
 });
 
 /*  Need to sumbsribe confirmedValue to the value of the user's, 
