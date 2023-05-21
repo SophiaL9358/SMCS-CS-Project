@@ -17,7 +17,7 @@
   let onWholeSchool = false;
   
   // TODO: TESTING ONLY, DELETE AFTER TESTING
-  user.set({
+  /*user.set({
         name:"Julia Kolotev", 
         email:"uwu@gmail.com", 
         loggedIn: true, 
