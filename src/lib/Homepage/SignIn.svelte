@@ -19,7 +19,8 @@
                 loggedIn: true,
                 confirmed: true, // TODO: Gets rid of confirmation
                 grade: 2025, // TODO: Assigns grade based on database
-                officerOn: "President"
+                officerOn: "President",
+                pageOn: "Grade"
             }));
             idInput.value = "";
             passwordInput.value = "";

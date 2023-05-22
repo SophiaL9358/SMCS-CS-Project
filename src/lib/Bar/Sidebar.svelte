@@ -41,6 +41,7 @@
     }
     .positions { /* mostly for debugging*/
         background-color: black;
+        
     }
     #scroll_container::-webkit-scrollbar{
     display: none;

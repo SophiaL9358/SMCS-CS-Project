@@ -17,15 +17,19 @@
   let onWholeSchool = false;
   
   // TODO: TESTING ONLY, DELETE AFTER TESTING
-  /*user.set({
+ /* user.set({
         name:"Julia Kolotev", 
         email:"uwu@gmail.com", 
         loggedIn: true, 
         confirmed: true,
         grade: 10,
-        officerOn: "President"
-    }); //*/
-    
+        officerOn: "President",
+        pageOn: "Grade"
+    }); 
+    sidebar_width_em.set({
+          display: "block",
+          width: $sidebar_width_em.width
+        });//*/
   // To set the margin left for the main component depending on the visibility of the sidebar
   let main_margin_left_em;
   $: if($sidebar_width_em.display == "block") {

@@ -46,7 +46,8 @@ export function resetUser() { // Resets user and sidebar - returns user to homep
         loggedIn: false, 
         confirmed: false,
         grade: undefined,
-        officerOn: undefined
+        officerOn: undefined,
+        pageOn: undefined
     });
     sidebar_width_em.set({
         width: 15,
@@ -60,7 +61,8 @@ export let user = writable({
     email:undefined, 
     loggedIn: false,
     grade: undefined,
-    officerOn: undefined
+    officerOn: undefined,
+    pageOn: undefined
 });
 
 /*  Need to sumbsribe confirmedValue to the value of the user's, 

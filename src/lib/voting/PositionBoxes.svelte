@@ -13,6 +13,7 @@
     //https://drive.google.com/file/d/1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ/view?usp=sharing
 </script>
 <div id = {position}></div>
+
 <Subtitle text = {position} />
 <CandidateInfoBox candidate ={{name: "Julia Kolotev",
 video: "https://www.youtube.com/embed/IA9lteWEQ44",
@@ -26,6 +27,7 @@ platform:["the moes of the mosey mo most moey mose muse moo",
     "boom boom boom boom boom boom boom boom boom boom boom boom boom", 
     "art bart"]
 }}/> 
+
 <CandidateInfoBox candidate ={{name: "Veronica Wang",
 video: introLink+"1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ",
 platform:["weef wof woooaf fwaf wofow waoofwoafwoefwjeowfwfo wfwoajfowjfa", 
