@@ -6,7 +6,6 @@
 
     export let position;
 
-    //https://drive.google.com/file/d/1o8AXRH9J30o1FgTUJHkh1wj_mAkvF2uJ/view?usp=sharing
     var electionInfo;
     $: if (electionInfo == undefined && $user.confirmed){
         electionInfo = getElectionName();

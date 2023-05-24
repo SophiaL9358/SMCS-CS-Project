@@ -3,18 +3,25 @@
     import { db, user, yellow_color } from "../constants.js";
     import Title from "../General/Title.svelte";
     import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
-    let backButton = undefined;
-    let nextButton = undefined;
+    
+    let topBackButton = undefined;
+    let topNextButton = undefined;
+    let botBackButton = undefined;
+    let botNextButton = undefined;
 
-    $: if (backButton != undefined && $user.pageOn == 0){
-        backButton.style.display = "none";
-    } else if (backButton != undefined) {
-        backButton.style.display = "initial";
+    $: if (topBackButton != undefined && $user.pageOn == 0){
+        topBackButton.style.display = "none";
+        botBackButton.style.display = "none";
+    } else if (topBackButton != undefined) {
+        topBackButton.style.display = "initial";
+        botBackButton.style.display = "initial";
     }
-    $: if (nextButton != undefined && $user.elections.length == $user.pageOn){
-        nextButton.style.display = "none";
-    } else if (backButton != undefined) {
-        nextButton.style.display = "initial";
+    $: if (topNextButton != undefined && $user.elections.length == $user.pageOn){
+        topNextButton.style.display = "none";
+        botNextButton.style.display = "none";
+    } else if (topNextButton != undefined) {
+        topNextButton.style.display = "initial";
+        botNextButton.style.display = "initial";
     }
     
 
@@ -60,6 +67,8 @@
         <p> Processing...</p>
     {:then electionInfo}
         <Title text = "{electionInfo.electionName} Election" />
+        <button bind:this = {topBackButton} on:click = {handleBackButtonClick}>Back</button>
+        <button bind:this = {topNextButton} on:click = {handleNextButtonClick}>Next</button>
         {#each electionInfo.positions as officerPos, i}
             <PositionBoxes position = {officerPos}/> <br>
         {/each}
@@ -69,7 +78,7 @@ hi
 {/if}
 
 
-<button bind:this = {backButton} on:click = {handleBackButtonClick}>Back</button>
-<button bind:this = {nextButton} on:click = {handleNextButtonClick}>Next</button>
+<button bind:this = {botBackButton} on:click = {handleBackButtonClick}>Back</button>
+<button bind:this = {botNextButton} on:click = {handleNextButtonClick}>Next</button>
 
 <br><br><br><br>

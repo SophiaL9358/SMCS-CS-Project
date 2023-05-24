@@ -8,7 +8,8 @@
 </script>
 <div class = "parent_container">
     <div id = "box">
-        <h3>{candidate.name}</h3> <br>
+        <h3 style = "display: inline-block;">{candidate.name}</h3> 
+        <button style = "float: right; display: inline-block;">Click here to Vote!</button>
         <div id = "content">
             <iframe title = "Candidate Video"
                 src="{candidate.video}" id = "video"/>
