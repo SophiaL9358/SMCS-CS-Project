@@ -4,20 +4,18 @@
     import SidebarBox from './SidebarBox.svelte';
 
     var electionInfo;
-    var gotInfo = false;
-    $: if (!gotInfo && $user.confirmed){
-        electionInfo = undefined;
+    $: if (electionInfo == undefined && $user.confirmed){
         electionInfo = getElectionName();
-        gotInfo = true;
-    } 
+    }
     async function getElectionName(){
         var collectionID = $user.elections[$user.pageOn];
         var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
-        var data =  {};
-        data.electionName = res.electionName;
-        data.positions = res.positions;
-        data.count = res.count;
-        return data;
+
+        return {
+            electionName: res.electionName,
+            positions: res.positions,
+            count: res.count
+        };
     }
 </script>
 
@@ -32,7 +30,7 @@
             {electionInfo.electionName}
         </div>
         <div id = "scroll_container">
-            <div class = "positions"> <!-- TODO: Testing overflow of sidebar (currently doesn't work)-->
+            <div class = "positions">
                 {#each electionInfo.positions as officerPos}
                     <SidebarBox position = "{officerPos}" />
                 {/each}
