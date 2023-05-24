@@ -78,7 +78,7 @@
 <center>
     <div class = "prompt">
         <!-- Textboxes -->
-        ID: <input type = "text" bind:this = {idInput}> <br><br>
+        ID: <input type = "text" bind:this = {idInput}> <br>
         Password: <input type = "password" bind:this = {passwordInput}> 
                 <!-- Show password button -->
                 <button style = "height: 1.5em; width: 4em;" on:mousedown = {() => {
