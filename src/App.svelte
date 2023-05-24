@@ -14,7 +14,6 @@
   onDestroy(unsubscribe);
 
   // Keep track of what page the user is one (false is default)
-  let onWholeSchool = false;
   
   // TODO: TESTING ONLY, DELETE AFTER TESTING
  /* user.set({
@@ -58,7 +57,7 @@
 <!-- Bars -->
 <div style = "width: 100%; height: 4em;"></div> <!-- Taking up the space the topbar would've had -->
 <Sidebar />
-
+<br>
 <main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there -->
   {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "PHS SGA Voting" />
@@ -81,9 +80,7 @@
     </div>
   </center>
 
-  {:else if !onWholeSchool} <!-- GRADE VOTING page -->
-      <GradeVotingPage />
-  {:else if onWholeSchool}  <!-- TODO: WHOLE SCHOOL VOTING page -->
+  {:else if true} <!-- GRADE VOTING page -->
       <GradeVotingPage />
   {:else}  <!-- I don't know how a user could see this but just in case -->
         An error occurred... please reload the page!

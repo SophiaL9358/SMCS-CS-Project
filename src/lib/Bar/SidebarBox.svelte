@@ -8,7 +8,7 @@
         box.style.backgroundColor = yellow_color;
         box.style.color = "black";
     } else if (box) {
-        box.style.backgroundColor = "black";
+        box.style.backgroundColor = "rgb(60, 60, 60)";
         box.style.color = "white";
     }
 
@@ -17,7 +17,7 @@
     }
 </script>
 
-<a href = "#{position}" on:click = {handleClick}>
+<a href = "#{position}" on:click = {handleClick} style = "text-decoration: none;">
 <div bind:this = {box} class = "parent_container" 
     style = "{outline_style} margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em;">
     <div>
@@ -37,6 +37,7 @@
         width: 100%;
         justify-content: center;
         transition: 0.25s;
+        
 
     }
     .parent_container:hover {

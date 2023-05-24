@@ -4,13 +4,32 @@
     import SidebarBox from './SidebarBox.svelte';
 
     var electionInfo;
+    var seeingElectionName = "";
+    var happened = false;
     $: if (electionInfo == undefined && $user.confirmed){
+        
         electionInfo = getElectionName();
     }
+    $: if (seeingElectionName != undefined && seeingElectionName.indexOf($user.elections[$user.pageOn]) == -1){
+        electionInfo = getElectionName();
+        happened = false;
+        console.log("here");
+        console.log(seeingElectionName.indexOf($user.elections[$user.pageOn]));
+        console.log($user.elections[$user.pageOn]);
+        console.log(seeingElectionName);
+    }
+    $: if (!happened && $user != undefined && $user.pageOn < $user.elections.length) {
+        happened = true;
+        electionInfo = getElectionName();
+    }
+
     async function getElectionName(){
         var collectionID = $user.elections[$user.pageOn];
         var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
-
+        if (res == undefined) {
+            return;
+        }
+        seeingElectionName = res.electionName;
         return {
             electionName: res.electionName,
             positions: res.positions,
@@ -27,7 +46,7 @@
     {:then electionInfo}
         {#if electionInfo != undefined}
         <div style = "margin-bottom: 3em;">
-            {electionInfo.electionName}
+            {electionInfo.electionName} Election
         </div>
         <div id = "scroll_container">
             <div class = "positions">
