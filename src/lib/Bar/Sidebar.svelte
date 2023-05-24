@@ -6,23 +6,24 @@
     var electionInfo;
     var seeingElectionName = "";
     var happened = false;
+
+    /* ----------- UPDATING THE SIDEBAR ----------- */
+    // Update the first time the user gets on the app
     $: if (electionInfo == undefined && $user.confirmed){
-        
         electionInfo = getElectionName();
     }
+    // If the names of the sidebar and the main title of voting screen is different
     $: if (seeingElectionName != undefined && $user.elections != undefined && seeingElectionName.indexOf($user.elections[$user.pageOn]) == -1){
         electionInfo = getElectionName();
         happened = false;
-        console.log("here");
-        console.log(seeingElectionName.indexOf($user.elections[$user.pageOn]));
-        console.log($user.elections[$user.pageOn]);
-        console.log(seeingElectionName);
     }
+    // If it hasn't happened and user's on a page that's not on a submit page
     $: if (!happened && $user.elections != undefined && $user.pageOn < $user.elections.length) {
         happened = true;
         electionInfo = getElectionName();
     }
 
+    // Get information from firestore
     async function getElectionName(){
         var collectionID = $user.elections[$user.pageOn];
         var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
@@ -42,13 +43,15 @@
     style = "{outline_style} color: {yellow_color}; margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em; display: {$sidebar_width_em.display};">
     
     {#await electionInfo}
-        <p> Processing...</p>
+        <p> Processing...</p> <!-- Waiting for firestore -->
+
     {:then electionInfo}
         {#if electionInfo != undefined}
         <div style = "margin-bottom: 3em;">
-            {electionInfo.electionName} Election
+            {electionInfo.electionName} Election <!-- Naming the election -->
         </div>
-        <div id = "scroll_container">
+
+        <div id = "scroll_container"> <!-- Sidebar boxes -->
             <div class = "positions">
                 {#each electionInfo.positions as officerPos}
                     <SidebarBox position = "{officerPos}" />

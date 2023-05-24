@@ -4,11 +4,13 @@
     import Title from "../General/Title.svelte";
     import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
     
+    /* ----------- CHANGING VISIBILITY OF BUTTONS ----------- */
     let topBackButton = undefined;
     let topNextButton = undefined;
     let botBackButton = undefined;
     let botNextButton = undefined;
 
+    // Back button
     $: if (topBackButton != undefined && $user.pageOn == 0){
         topBackButton.style.display = "none";
         botBackButton.style.display = "none";
@@ -16,6 +18,8 @@
         topBackButton.style.display = "initial";
         botBackButton.style.display = "initial";
     }
+
+    // Next button
     $: if (topNextButton != undefined && $user.elections.length == $user.pageOn){
         topNextButton.style.display = "none";
         botNextButton.style.display = "none";
@@ -24,35 +28,34 @@
         botNextButton.style.display = "initial";
     }
     
-
-    function handleBackButtonClick() {
+    /* ----------- HANDLING BUTTON CLICKS ----------- */
+    function handleBackButtonClick() { // Move a page back
         user.update(state => ({...state, 
             pageOn: $user.pageOn-1 
         }));
-        console.log("user" + " " + $user.pageOn);
-        electionInfo = getElectionName();
+        electionInfo = getElectionName(); // Reupdate candidates
     }
 
-
-    function handleNextButtonClick() {
+    function handleNextButtonClick() { // Move a page forward
         user.update(state => ({...state, 
             pageOn: $user.pageOn+1 
         }));
-        console.log("user" + " " + $user.pageOn);
-        electionInfo = getElectionName();
+        electionInfo = getElectionName(); // Reupdate candidates
     }
 
+    /* ----------- RETRIEVING FROM FIRESTORE ----------- */
     var electionInfo;
     
-    $: if (electionInfo == undefined && $user.confirmed){
+    $: if (electionInfo == undefined && $user.confirmed){ // First time user is on the page
         electionInfo = getElectionName();
     }
 
-    async function getElectionName(){
+    // Retrieve data and put onto the variable 'electionInfo'
+    async function getElectionName(){ 
         var collectionID = $user.elections[$user.pageOn];
         var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
         if (res == undefined){
-            return;
+            return; // If there's no more pages, return nothing
         }
         return {
             electionName: res.electionName,
@@ -61,19 +64,26 @@
         };
     }
 </script>
-<!-- Title! -->
-{#if $user.elections.length > $user.pageOn}
+
+<!------------- If user is on a VOTING page ------------->
+{#if $user.elections.length > $user.pageOn} 
     {#await electionInfo}
-        <p> Processing...</p>
+        <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->
     {:then electionInfo}
         <Title text = "{electionInfo.electionName} Election" />
+
+        <!-- Top buttons -->
         <button bind:this = {topBackButton} on:click = {handleBackButtonClick}>Back</button>
         <button bind:this = {topNextButton} on:click = {handleNextButtonClick}>Next</button>
+
+        <!-- Creates the position sections -->
         {#each electionInfo.positions as officerPos, i}
             <PositionBoxes position = {officerPos}/> <br>
         {/each}
+
     {/await}
 {:else}
+<!------------- If user is on a SUBMISSION page ------------->
 hi
 {/if}
 
@@ -81,4 +91,4 @@ hi
 <button bind:this = {botBackButton} on:click = {handleBackButtonClick}>Back</button>
 <button bind:this = {botNextButton} on:click = {handleNextButtonClick}>Next</button>
 
-<br><br><br><br>
+<br><br><br><br> <!-- Add some space at the bottom -->

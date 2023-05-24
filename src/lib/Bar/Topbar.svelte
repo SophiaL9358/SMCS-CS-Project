@@ -12,6 +12,7 @@
         }
     };
 
+    // Visibility of signout button
     let sign_out_button;
     $: if ($user.confirmed && sign_out_button != undefined){
         sign_out_button.style.display = "initial";
@@ -23,9 +24,11 @@
 </script>
 <div style = {outline_style} id = "box"> <!-- Topbar -->
     <div id = "content">
-        <!-- Sign out button-->
-        <button on:click={resetUser} class = "child" bind:this = {sign_out_button} style = "background-color: {yellow_color}">Sign Out</button>
-        <!-- Login/Username -->
+        <!-- Sign out button (and to clean the link)-->
+        <a href = "" style = "text-decoration: none;"><button on:click={resetUser} class = "child" bind:this = {sign_out_button} style = "background-color: {yellow_color}">
+            Sign Out</button> </a>
+        
+        <!-- Login/Username text -->
         <div class = "child" style = "color: {yellow_color}"> 
             {text()}
         </div>

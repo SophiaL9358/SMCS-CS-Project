@@ -3,6 +3,7 @@
     export let position = "NONE";
     export let candidate = "No Candidate Chosen";
 
+    // Set color of the sidebar boxes
     let box;
     $: if (box && $user.officerOn == position){
         box.style.backgroundColor = yellow_color;
@@ -12,6 +13,7 @@
         box.style.color = "white";
     }
 
+    // When clicking on a box
     function handleClick (){
         user.update(state => ({...state, officerOn: position}));
     }

@@ -1,36 +1,38 @@
 <script>
-    export let candidate = {
-        name: "First Last",
-        video: "https://drive.google.com/file/d/13R1MQjMNP0gJHvmVu4mwASH-jsqa3dVE/preview", // ensure this has preview!
-        platform: ["Platform 1","Platform 2","Platform 3"]
-    }
-
+    export let candidate; // Candidate information
 </script>
+
 <div class = "parent_container">
     <div id = "box">
+        <!-- Candidate name -->
         <h3 style = "display: inline-block;">{candidate.name}</h3> 
+
+        <!-- Vote button -->
         <button style = "float: right; display: inline-block;">Click here to Vote!</button>
+        
+        <!-- Content -->
         <div id = "content">
+            <!-- Video -->
             <iframe title = "Candidate Video"
                 src="{candidate.video}" id = "video"/>
-
+            
+            <!-- Platform -->
             <div id = "platform"> 
-                <p >{candidate.platform[0]}</p>
-                <p >{candidate.platform[1]}</p>
-                <p >{candidate.platform[2]}</p>
+                <p>1. {candidate.platform[0]}</p>
+                <p>2. {candidate.platform[1]}</p>
+                <p>3. {candidate.platform[2]}</p>
                 
             </div>
         </div>
     </div>
 </div>
 <br><br>
-<!--hi osaphia-->
+
 <style>
     #content {
         width: 100%;
         display: flex;
         justify-content: left;
-        /*align-items: center;*/
     }
     #box iframe {
         min-width: 60%;

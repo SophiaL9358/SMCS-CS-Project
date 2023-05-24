@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
+/* ----------- FIRESTORE RELATED VARIABLES ----------- */
 // Firebase imports
 import { initializeApp } from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
@@ -18,8 +19,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// USER RELATED FUNCTIONS
-export function resetUser() { // Resets user and sidebar - returns user to homepage
+
+/* ----------- USER RELATED FUNCTIONS ----------- */
+// Actual user object
+export let user = writable({
+    confirmed: false,
+    name:undefined, 
+    email:undefined, 
+    loggedIn: false,
+    grade: undefined,
+    elections: undefined,
+    pageOn: undefined,
+    officerOn: undefined
+});
+
+// Resets user and sidebar - returns user to homepage
+export function resetUser() {
     user.set({
         name:undefined, 
         email:undefined, 
@@ -35,17 +50,6 @@ export function resetUser() { // Resets user and sidebar - returns user to homep
         display: "none"
     });
 }
-// user object
-export let user = writable({
-    confirmed: false,
-    name:undefined, 
-    email:undefined, 
-    loggedIn: false,
-    grade: undefined,
-    elections: undefined,
-    pageOn: undefined,
-    officerOn: undefined
-});
 
 /*  Need to sumbsribe confirmedValue to the value of the user's, 
     since $user.confirmed doesn't work in JS files :|
@@ -56,10 +60,17 @@ export const unsubscribe = user.subscribe(value => {
     confirmedValue = value.confirmed;
 });
 
+/* ----------- SIDEBAR RELATED FUNCTIONS ----------- */
 // Updating visibility of sidebar based on the window size
 let windowHeight= 0;
 let windowWidth = 0;
 
+export let sidebar_width_em = writable({
+    width: 15,
+    display: "none"
+});
+
+// Change sidebar visibility based on window size
 export function updateSize() {
     windowHeight = window.innerHeight;
     windowWidth = window.innerWidth;
@@ -78,12 +89,8 @@ export function updateSize() {
     }
 }
 window.addEventListener("resize", updateSize);
-export let sidebar_width_em = writable({
-    width: 15,
-    display: "none"
-});
 
-// constants
+/* ----------- OTHER CONSTANTS (color, sizes, styles, etc.) ----------- */
 export const title_size_em = 3;
 export const subtitle_size_em = 1.5;
 export const yellow_color = "rgba(255, 218, 26, 1)";
