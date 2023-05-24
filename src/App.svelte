@@ -7,7 +7,7 @@
   import Topbar from "./lib/Bar/Topbar.svelte";
   import { onDestroy } from 'svelte';
   import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
-  import Grade10VotingPage from "./lib/Voting/Grade10VotingPage.svelte";
+  import Grade10VotingPage from "./lib/Voting/GradeVotingPage.svelte";
   import SignIn from "./lib/Homepage/SignIn.svelte";
 
   // From store of constants.js, need to destroy the unsub variable to prevent memory leaks
@@ -74,7 +74,7 @@
   <center>
     <div class = "prompt">
       Is this information correct?
-      <br> NAME: {$user.name} <br>EMAIL: {$user.email}
+      <br> NAME: <b>{$user.name}</b> <br>EMAIL: <b>{$user.email}</b> <br> GRADE: <b>{$user.grade}</b>
       <br><br>
       <button style = "background-color: {red_color};" on:click = {() => {resetUser();}}>No</button>
       <button style = "background-color: {green_color};" on:click = {handleConfirm}>Yes</button>

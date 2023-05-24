@@ -13,6 +13,7 @@
     let firebaseCallback;
 
     async function handleClick(){
+        document.getElementById("warning").style.color = "gray";
         warning = "Processing...";
         try {
             response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
@@ -22,31 +23,36 @@
             var fbResponse = (await firebaseCallback).data()
 
             if (fbResponse == undefined) {
+                document.getElementById("warning").style.color = "red";
                 warning = "Unauthorized user!";
             } else {
                 console.log((await firebaseCallback).data());
                 // Update user with new info
                 user.update(state => ({...state, 
                     email: idInput.value + "@mcpsmd.net",
-                    name: idInput.value,
+                    name: fbResponse.first_name + " "+fbResponse.last_name,
                     loggedIn: true,
-                    confirmed: true, // TODO: Gets rid of confirmation
-                    grade: 2025, // TODO: Assigns grade based on database
+                    confirmed: false, // TODO: Gets rid of confirmation
+                    grade: fbResponse.grade, // TODO: Assigns grade based on database
                     officerOn: "President",
                     pageOn: "Grade"
                 }));
+
                 idInput.value = "";
                 passwordInput.value = "";
                 response = null;
-
+                fbResponse = null;
+                document.getElementById("warning").style.color = "red";
                 // TODO: GET RID OF THIS IF PUTTING BACK CONFIRMATION PAGE:
-                sidebar_width_em.set({
+                /*sidebar_width_em.set({
                     display: "block",
                     width: $sidebar_width_em.width
                 });
                 updateSize();
+                */
             }
         } catch {
+            document.getElementById("warning").style.color = "red";
             warning = "Username or Password is incorrect!";  
         }
     }
@@ -59,7 +65,7 @@
         <br> <br>
         <button on:click = {handleClick}>Submit</button>
         
-        <p>{warning}</p>
+        <p id = "warning">{warning}</p>
     </div>
 </center>
 
