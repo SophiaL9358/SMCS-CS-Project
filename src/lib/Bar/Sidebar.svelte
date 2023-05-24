@@ -10,7 +10,7 @@
         
         electionInfo = getElectionName();
     }
-    $: if (seeingElectionName != undefined && seeingElectionName.indexOf($user.elections[$user.pageOn]) == -1){
+    $: if (seeingElectionName != undefined && $user.elections != undefined && seeingElectionName.indexOf($user.elections[$user.pageOn]) == -1){
         electionInfo = getElectionName();
         happened = false;
         console.log("here");
@@ -18,7 +18,7 @@
         console.log($user.elections[$user.pageOn]);
         console.log(seeingElectionName);
     }
-    $: if (!happened && $user != undefined && $user.pageOn < $user.elections.length) {
+    $: if (!happened && $user.elections != undefined && $user.pageOn < $user.elections.length) {
         happened = true;
         electionInfo = getElectionName();
     }
