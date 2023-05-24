@@ -1,7 +1,8 @@
 <script>
     import PositionBoxes from "./PositionBoxes.svelte";
-    import { user, yellow_color } from "../constants.js";
+    import { db, user, yellow_color } from "../constants.js";
     import Title from "../General/Title.svelte";
+    import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
 
     let backButton = undefined;
     let nextButton = undefined;
@@ -15,13 +16,33 @@
         nextButton.style.backgroundColor = yellow_color;
 
     }
+    var electionInfo;
+    var gotInfo = false;
+    $: if (!gotInfo && $user.confirmed){
+        electionInfo = getElectionName();
+        gotInfo = true;
+    } 
+    async function getElectionName(){
+        var collectionID = $user.elections[$user.pageOn];
+        var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
+        var data =  {};
+        data.electionName = res.electionName;
+        data.positions = res.positions;
+        data.count = res.count;
+        console.log(data);
+        return data;
+    }
 </script>
-<Title text = "Rising 10th Grade Voting" />
+<!-- Title! -->
+{#await electionInfo}
+    <p> Processing...</p>
+{:then electionInfo}
+    <Title text = "{electionInfo.electionName} Election" />
+    {#each electionInfo.positions as officerPos, i}
+        <PositionBoxes position = {officerPos}/> <br>
+    {/each}
+{/await}
 
-    <PositionBoxes position = "President" /><br>
-    <PositionBoxes position = "Vice President" /><br>
-    <PositionBoxes position = "Secretary" /><br>
-    <PositionBoxes position = "Treasurer" /><br>
 
 <button bind:this = {backButton}>Back</button>
 <button bind:this = {nextButton}>Next</button>

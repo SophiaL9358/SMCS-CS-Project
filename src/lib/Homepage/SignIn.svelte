@@ -10,7 +10,6 @@
 
     const DISTRICT_URL = "https://md-mcps-psv.edupoint.com/PXP2_Login.aspx";
     let response;
-    let firebaseCallback;
 
     async function handleClick(){
         document.getElementById("warning").style.color = "gray";
@@ -19,29 +18,36 @@
             response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
             
             // get firebase data
-            firebaseCallback = getDoc(doc(db, "PHS IDs/"+idInput.value));
-            var fbResponse = (await firebaseCallback).data()
-
-            if (fbResponse == undefined) {
+            var firebaseIDCallback = getDoc(doc(db, "PHS IDs/"+idInput.value));
+            var fbIDResponse = (await firebaseIDCallback).data()
+            
+            if (fbIDResponse == undefined) {  
+                console.log(fbIDResponse);
                 document.getElementById("warning").style.color = "red";
                 warning = "Unauthorized user!";
             } else {
-                console.log((await firebaseCallback).data());
-                // Update user with new info
-                user.update(state => ({...state, 
-                    email: idInput.value + "@mcpsmd.net",
-                    name: fbResponse.first_name + " "+fbResponse.last_name,
-                    loggedIn: true,
-                    confirmed: false, // TODO: Gets rid of confirmation
-                    grade: fbResponse.grade, // TODO: Assigns grade based on database
-                    officerOn: "President",
-                    pageOn: "Grade"
+                var firebaseElectionCallback = getDoc(doc(db, "General Information/"+ fbIDResponse.grade));
+                var fbElectionResponse = (await firebaseElectionCallback).data();
+                if (fbElectionResponse == undefined) {
+                    document.getElementById("warning").style.color = "red";
+                    warning = "No elections available for Grade " + fbIDResponse.grade+"!";
+                } else {
+                    user.update(state => ({...state, 
+                        email: idInput.value + "@mcpsmd.net",
+                        name: fbIDResponse.first_name + " "+fbIDResponse.last_name,
+                        loggedIn: true,
+                        confirmed: false, // TODO: Gets rid of confirmation
+                        grade: fbIDResponse.grade, // TODO: Assigns grade based on database
+                        elections: fbElectionResponse.available_elections,
+                        pageOn: 0,
+                        officerOn: "President"
                 }));
+                    idInput.value = "";
+                    passwordInput.value = "";
+                }
+                // Update user with new info
 
-                idInput.value = "";
-                passwordInput.value = "";
-                response = null;
-                fbResponse = null;
+                fbElectionResponse = null;
                 document.getElementById("warning").style.color = "red";
                 // TODO: GET RID OF THIS IF PUTTING BACK CONFIRMATION PAGE:
                 /*sidebar_width_em.set({
@@ -51,6 +57,9 @@
                 updateSize();
                 */
             }
+            
+            response = null;
+            fbIDResponse = null;
         } catch {
             document.getElementById("warning").style.color = "red";
             warning = "Username or Password is incorrect!";  

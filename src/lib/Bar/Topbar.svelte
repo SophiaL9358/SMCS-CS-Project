@@ -13,7 +13,7 @@
     };
 
     let sign_out_button;
-    $: if ($user.loggedIn && sign_out_button != undefined){
+    $: if ($user.confirmed && sign_out_button != undefined){
         sign_out_button.style.display = "initial";
     } else if (sign_out_button != undefined) {
         sign_out_button.style.display = "none";

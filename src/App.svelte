@@ -7,7 +7,7 @@
   import Topbar from "./lib/Bar/Topbar.svelte";
   import { onDestroy } from 'svelte';
   import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
-  import Grade10VotingPage from "./lib/Voting/GradeVotingPage.svelte";
+  import GradeVotingPage from "./lib/Voting/GradeVotingPage.svelte";
   import SignIn from "./lib/Homepage/SignIn.svelte";
 
   // From store of constants.js, need to destroy the unsub variable to prevent memory leaks
@@ -82,9 +82,9 @@
   </center>
 
   {:else if !onWholeSchool} <!-- GRADE VOTING page -->
-      <Grade10VotingPage />
+      <GradeVotingPage />
   {:else if onWholeSchool}  <!-- TODO: WHOLE SCHOOL VOTING page -->
-      <Grade10VotingPage />
+      <GradeVotingPage />
   {:else}  <!-- I don't know how a user could see this but just in case -->
         An error occurred... please reload the page!
   {/if}
