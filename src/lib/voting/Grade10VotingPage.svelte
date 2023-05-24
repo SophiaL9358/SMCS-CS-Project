@@ -21,7 +21,7 @@
     <PositionBoxes position = "President" /><br>
     <PositionBoxes position = "Vice President" /><br>
     <PositionBoxes position = "Secretary" /><br>
-    <PositionBoxes position = "Treasury" /><br>
+    <PositionBoxes position = "Treasurer" /><br>
 
 <button bind:this = {backButton}>Back</button>
 <button bind:this = {nextButton}>Next</button>

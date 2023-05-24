@@ -3,12 +3,8 @@ import { writable } from 'svelte/store';
 // Firebase imports
 import { initializeApp } from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Fire base config
 const firebaseConfig = {
     apiKey: "AIzaSyB15p3EEpBfzKg9p3TP7wW71Fu0vjVu3OU",
     authDomain: "cs-pr-383805.firebaseapp.com",
@@ -18,25 +14,9 @@ const firebaseConfig = {
     appId: "1:341767156528:web:c849be289b33e456994ef5"
   };
   
-  // Initialize Firebase
 // Initialize Firebase - spaghetti code currently
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
-
-export async function getSomeList() {
-    const citiesCol = doc(db, 'PHS IDs/420420');
-    console.log("start");
-    const smth = getDoc(citiesCol);
-    console.log((await smth).data());
-    let cityList = "filler";
-    /*
-    const citySnapshot = await getDocs(citiesCol);
-    const cityList = citySnapshot.docs.map(doc => doc.data());*/
-    console.log("end");
-    console.log(cityList);
-    return cityList;
-  }
+export const db = getFirestore(app);
 
 // USER RELATED FUNCTIONS
 export function resetUser() { // Resets user and sidebar - returns user to homepage

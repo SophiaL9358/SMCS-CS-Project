@@ -6,7 +6,7 @@
   import Sidebar from "./lib/Bar/Sidebar.svelte";
   import Topbar from "./lib/Bar/Topbar.svelte";
   import { onDestroy } from 'svelte';
-  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color, getSomeList } from "./lib/constants.js";
+  import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
   import Grade10VotingPage from "./lib/Voting/Grade10VotingPage.svelte";
   import SignIn from "./lib/Homepage/SignIn.svelte";
 
@@ -65,7 +65,7 @@
 
     <Subtitle text = "Student Sign In" />
     <SignIn />
-    
+    <br>
     <Subtitle text = "Teacher Sign In" />
     <GoogleAuthButton />
 
