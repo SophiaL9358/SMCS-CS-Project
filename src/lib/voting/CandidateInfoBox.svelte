@@ -8,10 +8,10 @@
     export let candPosition; // ex. Pres, VP
     $: collectionID = $user.elections[$user.pageOn];
     $: index = candidate_selections[collectionID].positions.indexOf(candPosition);
-    $: if (button != undefined && candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
-        button.innerHTML = "VOTED!";
+    $: if (button != undefined && candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) == -1){
+        button.innerHTML = "jlkljk!";
     } else if (button != undefined) {
-        button.innerHTML = "Click here to vote!";
+        button.innerHTML = "VOTED!";
     }
     async function handleVoteClick(){
         console.log(candidate_selections);
@@ -32,7 +32,7 @@
             candidate_selections[collectionID].chosen_candidates[index].splice(2, 1);
             candidate_selections[collectionID].chosen_candidates[index].push(candidate.name);
         } 
-        console.log(candidate_selections);
+        console.log(candidate_selections[collectionID].chosen_candidates[index]);
         /*
         STEPS:
         1. Check if they've already voted on ==> remove them from list, update button
