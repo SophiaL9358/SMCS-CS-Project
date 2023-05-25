@@ -32,3 +32,7 @@ button:hover {
   width: 30%;
   padding: 1em 2em 1em 2em;
 }
+
+.red {
+  color: red;
+}

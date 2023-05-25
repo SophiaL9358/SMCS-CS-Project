@@ -45,7 +45,7 @@
 
 <div id = "top"></div>
 <main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there -->
- <!-- {#if !$user.loggedIn} <!-- LOGIN page
+ {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "PHS SGA Voting" />
 
     <Subtitle text = "Student Sign In" />
@@ -54,7 +54,7 @@
     <Subtitle text = "Teacher Sign In" />
     <GoogleAuthButton />
 
-  {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page 
+  {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page -->
   <Title text = "PHS SGA Voting" />
   <center>
     <div class = "prompt">
@@ -67,10 +67,9 @@
     </div>
   </center>
 
-  {:else}  <!-- VOTING page 
+  {:else}  <!-- VOTING page -->
     <VotingPage />
-  {/if} -->
-  <VotingPage />
+  {/if} 
 </main>
 <div id = "bottom"></div>
 

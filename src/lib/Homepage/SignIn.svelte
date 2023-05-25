@@ -48,9 +48,7 @@
                         officerOn: "President"
                     }));
 
-                    // TESTING
-                    var test = "oowo"
-                    
+                    // TODO: CLEANUP CODE
                     var collectionID = $user.elections[$user.pageOn];
                     var thing =  getDoc(doc(db, collectionID + "/All Positions"));
                     var res =  (await thing).data();
@@ -58,7 +56,17 @@
                         positions: res.positions,
                         chosen_candidates: []
                     };
-                    
+                    // positions is all the posistions in that election
+                    console.log(candidate_selections);
+                    for (var i = 0; i < candidate_selections[collectionID].positions.length; i ++){
+                        console.log();
+                        var temp = [];
+                        temp.push(candidate_selections[collectionID].positions[i]);
+                        var temp2 = (await getDoc(doc(db, collectionID + "/"+temp[0]+" Information"))).data();
+                        temp.push(temp2.numSelectionsAllowed);
+                        candidate_selections[collectionID].chosen_candidates.push(temp);
+                    }
+                    console.log(candidate_selections);
                     
                     // Reset text from textboxes
                     idInput.value = "";

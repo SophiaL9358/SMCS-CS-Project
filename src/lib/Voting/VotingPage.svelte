@@ -1,6 +1,6 @@
 <script>
     import PositionBoxes from "./PositionBoxes.svelte";
-    import { db, user, yellow_color } from "../constants.js";
+    import { db, green_color, user, yellow_color } from "../constants.js";
     import Title from "../General/Title.svelte";
     import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
     
@@ -87,7 +87,35 @@
     {/await}
 {:else}
 <!------------- If user is on a SUBMISSION page ------------->
-hi
+<br>
+<center><div class = "prompt">
+    <b><i>Submission Page</i></b>
+    <br>
+    You have voted for:<br><br>
+    <b>Rising Junior Election</b>
+    <div style = "float: left; text-align: left; margin: 0.5em 1em 1em 1em; width:100%;">
+        President: Peppa Pig<br>
+        Vice President: Peppa Dad, Peppa Mom<br>
+        Secretary: Queencard<br>
+        Treasurer: Mr. Plank<br>
+        MCR Representative: ME<br>
+    </div>
+
+    <br><br>
+    <b>Whole School Election</b>
+    <div style = "float: left; text-align: left; margin: 0.5em 1em 1em 1em; width:100%;">
+        President .......................................... Peppa Pig<br>
+        Vice President .............. Peppa Dad, Peppa Mom<br>
+        Secretary ............................................. <b class = "red">NONE</b><br>
+        Treasurer: Mr. Plank<br>
+        MCR Representative: ME<br>
+    </div>
+
+    <!-- SUBMISSION CONSTANT STUFF -->
+    <p class = "red">Once you submit, you cannot edit your vote!</p>
+    <button style = "background-color: {green_color};">Submit</button>
+</div></center>
+<br>
 {/if}
 
 

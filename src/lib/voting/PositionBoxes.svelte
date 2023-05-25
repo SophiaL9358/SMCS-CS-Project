@@ -42,7 +42,7 @@
 {:then electionInfo}
     <!-- Show candidates for that position -->
     {#each electionInfo.candidates as candidateInfo, i}
-        <CandidateInfoBox candidate = {{
+        <CandidateInfoBox candPosition = {position} candidate = {{
             name: candidateInfo[0],
             platform: candidateInfo[1], 
             video: candidateInfo[2]}} /><br>
