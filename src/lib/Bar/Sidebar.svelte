@@ -1,12 +1,20 @@
 <script>
     import { doc, getDoc } from 'firebase/firestore';
-    import { yellow_color, db, user, outline_width_em, outline_style, sidebar_width_em } from '../constants.js';
+    import { yellow_color, db, user, outline_width_em, outline_style, sidebar_width_em, updateSize } from '../constants.js';
     import SidebarBox from './SidebarBox.svelte';
 
     var electionInfo;
     var seeingElectionName = "";
     var happened = false;
 
+    $: if ($user != undefined && $user.elections != undefined && $user.elections.length == $user.pageOn){
+        sidebar_width_em.set({
+                width: 0,
+                display: "none"
+            });
+    } else {
+        updateSize();
+    }
     /* ----------- UPDATING THE SIDEBAR ----------- */
     // Update the first time the user gets on the app
     $: if (electionInfo == undefined && $user.confirmed){
@@ -47,10 +55,12 @@
 
     {:then electionInfo}
         {#if electionInfo != undefined}
-        <div style = "margin-bottom: 3em;">
+        <div style = "margin-bottom: 2em;">
             {electionInfo.electionName} Election <!-- Naming the election -->
         </div>
-
+        <a href = "#top"><button style = "background-color: {yellow_color};">Top</button></a>
+        <a href = "#bottom"><button style = "background-color: {yellow_color};">Bottom</button></a>
+        <br><br>
         <div id = "scroll_container"> <!-- Sidebar boxes -->
             <div class = "positions">
                 {#each electionInfo.positions as officerPos}

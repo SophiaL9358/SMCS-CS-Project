@@ -33,6 +33,27 @@ export let user = writable({
     officerOn: undefined
 });
 
+// Student selection object
+export let candidate_selections = {};
+
+/*
+    let test = {
+        Freshman: {
+            positions: ["President", "Vice President", "Secretary", "Treasurer", "Leadership Team Representative"],
+            candidate: [[President, 1],
+                        [Vice President, 2],
+                        [1],
+                        [1],
+                        [1]]
+        },
+        Sophmore: {},
+        Junior: {},
+        Senior: {},
+        Whole_School: {}
+    }
+test.push
+*/
+    
 // Resets user and sidebar - returns user to homepage
 export function resetUser() {
     user.set({
@@ -57,8 +78,10 @@ export function resetUser() {
 */
 let confirmedValue;
 export const unsubscribe = user.subscribe(value => {
-    confirmedValue = value.confirmed;
+    confirmedValue = [value.confirmed, value.pageOn, value.elections]
 });
+
+
 
 /* ----------- SIDEBAR RELATED FUNCTIONS ----------- */
 // Updating visibility of sidebar based on the window size
@@ -74,7 +97,7 @@ export let sidebar_width_em = writable({
 export function updateSize() {
     windowHeight = window.innerHeight;
     windowWidth = window.innerWidth;
-    if (confirmedValue) {
+    if (confirmedValue[0] && !(confirmedValue[1] == confirmedValue[2].length)) {
         if (windowWidth < 800){ // Hide sidebar if 
             sidebar_width_em.set({
                 width: 0,

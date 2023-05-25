@@ -1,7 +1,8 @@
 <script>
     import StudentVue from 'studentvue';
-    import { user, sidebar_width_em, updateSize, db } from '../constants.js';
+    import { user, sidebar_width_em, updateSize, db, candidate_selections } from '../constants.js';
     import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+    import { construct_svelte_component } from 'svelte/internal';
 
     let idInput; // id textbox
     let passwordInput; // password textbox
@@ -46,6 +47,18 @@
                         pageOn: 0,
                         officerOn: "President"
                     }));
+
+                    // TESTING
+                    var test = "oowo"
+                    
+                    var collectionID = $user.elections[$user.pageOn];
+                    var thing =  getDoc(doc(db, collectionID + "/All Positions"));
+                    var res =  (await thing).data();
+                    candidate_selections[collectionID] = {
+                        positions: res.positions,
+                        chosen_candidates: []
+                    };
+                    
                     
                     // Reset text from textboxes
                     idInput.value = "";
@@ -57,12 +70,15 @@
             response = null;
             fbIDResponse = null;
             fbElectionResponse = null;
-            document.getElementById("warning").style.color = "red";
         } catch {
             // If StudentVUE returns an error
-            document.getElementById("warning").style.color = "red";
             warning = "Username or Password is incorrect!";  
         }
+        if (document.getElementById("warning") != null){
+            document.getElementById("warning").style.color = "red";
+
+        }
+
     }
     
     // Check for enter

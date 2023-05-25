@@ -4,6 +4,7 @@
     import Title from "../General/Title.svelte";
     import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
     
+
     /* ----------- CHANGING VISIBILITY OF BUTTONS ----------- */
     let topBackButton = undefined;
     let topNextButton = undefined;
@@ -41,7 +42,9 @@
             pageOn: $user.pageOn+1 
         }));
         electionInfo = getElectionName(); // Reupdate candidates
+        
     }
+
 
     /* ----------- RETRIEVING FROM FIRESTORE ----------- */
     var electionInfo;
@@ -66,7 +69,7 @@
 </script>
 
 <!------------- If user is on a VOTING page ------------->
-{#if $user.elections.length > $user.pageOn} 
+{#if $user != undefined && $user.elections != undefined && $user.elections.length > $user.pageOn} 
     {#await electionInfo}
         <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->
     {:then electionInfo}
