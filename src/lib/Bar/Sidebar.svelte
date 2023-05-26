@@ -74,8 +74,7 @@
             </div>
         </div>
         {/if}
-    {/await}
-        
+    {/await}        
 </div>
 
 <style>

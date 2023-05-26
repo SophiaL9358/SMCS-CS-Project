@@ -20,8 +20,9 @@
             }
         }
     */
-    function thing (posInfoList){
-        let res = posInfoList[0]+": ";
+    function getCandidates (posInfoList){
+        let numSelections = posInfoList.length - 2 +posInfoList[1];
+        let res = posInfoList[0]+ " ("+numSelections+"): ";
         let people = [];
         for (let i = 2; i < posInfoList.length + posInfoList[1]; i ++){
             console.log("hi");
@@ -48,8 +49,8 @@
     {#each $user.elections as election}
         <br>
         <b>{election}</b>
-        {#each candidate_selections[election].chosen_candidates as someList}
-            <p style = "margin: 0.2em;">{@html thing(someList)}</p>
+        {#each candidate_selections[election].chosen_candidates as posInfoList}
+            <p style = "margin: 0.2em;">{@html getCandidates(posInfoList)}</p>
         {/each}
     {/each}
     <!--

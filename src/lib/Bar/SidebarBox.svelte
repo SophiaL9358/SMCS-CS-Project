@@ -1,5 +1,5 @@
 <script>
-    import { yellow_color, outline_width_em, outline_style, sidebar_width_em, user } from '../constants.js';
+    import { yellow_color, outline_width_em, outline_style, sidebar_width_em, user, candidate_selections, button_change } from '../constants.js';
     export let position = "NONE";
     export let candidate = "No Candidate Chosen";
 
@@ -14,8 +14,30 @@
     }
 
     // When clicking on a box
+    let candidate_text = "Processing...";
+    $: if ($button_change.change >=0){
+        candidate_text = showCandidates();
+    } 
     function handleClick (){
         user.update(state => ({...state, officerOn: position}));
+    }
+
+    function showCandidates(){
+        let index = candidate_selections[$user.elections[$user.pageOn]].positions.indexOf(position);
+        let posInfoList = candidate_selections[$user.elections[$user.pageOn]].chosen_candidates[index];
+        
+        let res = [];
+        for (let i = 2; i < posInfoList.length + posInfoList[1]; i ++){
+            console.log("hlep me");
+            if (i >= posInfoList.length){
+                console.log(posInfoList[i]);
+                res.push("No Candidate Chosen");
+            } else {
+                res.push(posInfoList[i]);
+            }
+        }
+
+        return res.join("<br>");
     }
 </script>
 
@@ -26,7 +48,9 @@
         {position}
     </div> 
     <div style = "margin-top: 0.5em;"> <!-- Candidate chosen  -->
-        <i style = "font-size: 0.9em;">{candidate}</i>
+        <i style = "font-size: 0.9em;">
+            {@html candidate_text}
+        </i>
     </div>
 </div>
 </a>

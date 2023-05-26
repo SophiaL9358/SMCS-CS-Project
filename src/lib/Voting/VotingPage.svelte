@@ -33,14 +33,17 @@
     /* ----------- HANDLING BUTTON CLICKS ----------- */
     function handleBackButtonClick() { // Move a page back
         user.update(state => ({...state, 
-            pageOn: $user.pageOn-1 
+            pageOn: $user.pageOn-1,
+            officerOn: "President"
         }));
         electionInfo = getElectionName(); // Reupdate candidates
+
     }
 
     function handleNextButtonClick() { // Move a page forward
         user.update(state => ({...state, 
-            pageOn: $user.pageOn+1 
+            pageOn: $user.pageOn+1,
+            officerOn: "President"
         }));
         electionInfo = getElectionName(); // Reupdate candidates
         

@@ -30,6 +30,16 @@
             // FORMAT for "candidates": [name, platform, video]
         };
     }
+
+    // Change highlighted sidebar box when scrolling past a position
+    window.addEventListener("scroll", function() {
+        let elementTarget = document.getElementById(position);
+        if (window.scrollY > (elementTarget.offsetTop + elementTarget.offsetHeight-50)) {
+            user.update(state => ({...state, 
+                officerOn: position}));
+        }
+    })
+
 </script>
 
 <div id = {position}></div> <!-- For sidebar to jump to -->
