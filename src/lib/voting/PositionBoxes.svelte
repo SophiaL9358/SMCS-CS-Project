@@ -6,7 +6,8 @@
 
     export let position; // Position retrieving data from (ex. President, VP)
 
-    /* ----------- RETRIEVING FROM FIRESTORE ----------- */
+    /* ----------- RETRIEVING INFORMATION FROM FIRESTORE ----------- */
+    // Retrieving: description, each candidate's information
     var electionInfo;
     $: if (electionInfo == undefined && $user.confirmed){
         electionInfo = getElectionName();
@@ -25,10 +26,8 @@
     
         return {
             description: resInfo.description,
-            numSelections: resInfo.numSelectionsAllowed,
-            numCandidates: resInfo.numCandidates,
             candidates: candidates
-            // FORMAT: [name, platform, video]
+            // FORMAT for "candidates": [name, platform, video]
         };
     }
 </script>
@@ -39,12 +38,13 @@
 {#await electionInfo}
     <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->
 {:then electionInfo}
+    <center><p class = "prompt">{electionInfo.description}</p></center> <!-- Description -->
     <!-- Show candidates for that position -->
     {#each electionInfo.candidates as candidateInfo, i}
         <CandidateInfoBox candPosition = {position} candidate = {{
             name: candidateInfo[0],
             platform: candidateInfo[1], 
-            video: candidateInfo[2]}} /><br>
+            video: candidateInfo[2]
+            }} /><br>
     {/each}
-
 {/await}

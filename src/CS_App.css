@@ -20,6 +20,8 @@ button {
   width: 7em;
   height: 3em;
   font-weight: bold;
+  transition: 0.25s;
+
 }
 
 button:hover {

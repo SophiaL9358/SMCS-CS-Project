@@ -15,13 +15,13 @@ const firebaseConfig = {
     appId: "1:341767156528:web:c849be289b33e456994ef5"
   };
   
-// Initialize Firebase - spaghetti code currently
+// Initialize Firebase, get database (db)
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 
 /* ----------- USER RELATED FUNCTIONS ----------- */
-// Actual user object
+// user store - keeps track of STUDENT USERs status
 export let user = writable({
     confirmed: false,
     name:undefined, 
@@ -33,30 +33,26 @@ export let user = writable({
     officerOn: undefined
 });
 
-// Student selection object
+// Student candidate selection object - keeps track of candidates the user has voted for
 export let candidate_selections = {};
-export let button_change = writable({
+export let button_change = writable({ // used to detect when the candidate_selection has changed
     change: 0
 });
 /*
-    let test = {
-        Freshman: {
-            positions: ["President", "Vice President", "Secretary", "Treasurer", "Leadership Team Representative"],
-            candidate: [[President, 1],
-                        [Vice President, 2],
-                        [1],
-                        [1],
-                        [1]]
-        },
-        Sophmore: {},
-        Junior: {},
-        Senior: {},
-        Whole_School: {}
-    }
-test.push
+STRUCTURE
+let test = {
+    Freshman: {
+        positions: ["President", "Vice President", "Secretary", "Treasurer", "Leadership Team Representative"],
+        candidate: [[President, 1],
+                    [Vice President, 2],
+                    [1],
+                    [1],
+                    [1]]
+    },
+}
 */
     
-// Resets user and sidebar - returns user to homepage
+// Resets user, sidebar, and candidate selection - returns user to homepage
 export function resetUser() {
     user.set({
         name:undefined, 
@@ -72,6 +68,7 @@ export function resetUser() {
         width: 15,
         display: "none"
     });
+    candidate_selections = {};
 }
 
 /*  Need to sumbsribe confirmedValue to the value of the user's, 
@@ -84,12 +81,11 @@ export const unsubscribe = user.subscribe(value => {
 });
 
 
-
 /* ----------- SIDEBAR RELATED FUNCTIONS ----------- */
 // Updating visibility of sidebar based on the window size
-let windowHeight= 0;
 let windowWidth = 0;
 
+// sidebar store - keeps track of sidebar status
 export let sidebar_width_em = writable({
     width: 15,
     display: "none"
@@ -97,10 +93,9 @@ export let sidebar_width_em = writable({
 
 // Change sidebar visibility based on window size
 export function updateSize() {
-    windowHeight = window.innerHeight;
     windowWidth = window.innerWidth;
     if (confirmedValue[0] && !(confirmedValue[1] == confirmedValue[2].length)) {
-        if (windowWidth < 800){ // Hide sidebar if 
+        if (windowWidth < 800){ // Hide sidebar if window width less than 800 px
             sidebar_width_em.set({
                 width: 0,
                 display: "none"

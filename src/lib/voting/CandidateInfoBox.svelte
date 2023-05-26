@@ -1,16 +1,16 @@
 <script>
-    import { doc, getDoc } from "firebase/firestore";
     import { user, db, candidate_selections, button_change, green_color } from "../constants";
 
-    let button; 
-    let index;
+    let button; // Vote button
+    let index; // Index holding what position the candidate is running for
 
     export let candidate; // Candidate information
     export let candPosition; // ex. Pres, VP
-    $: collectionID = $user.elections[$user.pageOn];
-    $: index = candidate_selections[collectionID].positions.indexOf(candPosition);
 
-    $: if (button != undefined && $button_change.change >=0 ){
+    $: collectionID = $user.elections[$user.pageOn]; // The key for the election's arrays
+    $: index = candidate_selections[collectionID].positions.indexOf(candPosition); // Index for the position's position
+
+    $: if (button != undefined && $button_change.change >=0 ){ // Any button clicked in position => Changes text of buttons
         if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
             button.innerHTML = "VOTED!";
             button.style.backgroundColor = green_color;
@@ -22,34 +22,34 @@
     } 
 
     async function handleVoteClick(){
-
-        if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
-            // if candidate was voted for
-            console.log("option 1");
-            candidate_selections[collectionID].chosen_candidates[index].pop(candidate.name);
-            candidate_selections[collectionID].chosen_candidates[index][1] += 1;
-        }
-        else if (candidate_selections[collectionID].chosen_candidates[index][1] != 0){// checks num selections left
-            // if selections still there
-            console.log("option 2");
-            candidate_selections[collectionID].chosen_candidates[index].push(candidate.name);
-            candidate_selections[collectionID].chosen_candidates[index][1] -= 1;
-        } else {
-            // if selections are not there
-            console.log("option 3");
-            candidate_selections[collectionID].chosen_candidates[index].splice(2, 1);
-            candidate_selections[collectionID].chosen_candidates[index].push(candidate.name);
-        } 
-        console.log(candidate_selections[collectionID].chosen_candidates[index]);
-        /*
-        STEPS:
+        /* STEPS:
         1. Check if they've already voted on ==> remove them from list, update button
         2. Check if there's enough selections left
             - If none ==> remove first person from the list, add in new person 
             - If space ==> Add person
         3. Update button
         */
-       button_change.update(state => ({... state, change: ($button_change.change +=1)%10}));       
+
+        if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
+            // if candidate was voted for already ==> remove them
+            var tempIndex = candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name);
+            candidate_selections[collectionID].chosen_candidates[index].splice(tempIndex, 1);
+            candidate_selections[collectionID].chosen_candidates[index][1] += 1;
+        }
+        else if (candidate_selections[collectionID].chosen_candidates[index][1] != 0){// checks num selections left
+            // if selections are still open ==> add person
+            candidate_selections[collectionID].chosen_candidates[index].push(candidate.name);
+            candidate_selections[collectionID].chosen_candidates[index][1] -= 1;
+        } else {
+            // if there are no more selections left ==> remove person, add new person 
+            candidate_selections[collectionID].chosen_candidates[index].splice(2, 1);
+            candidate_selections[collectionID].chosen_candidates[index].push(candidate.name);
+        } 
+        
+        // DEBUG: console.log(candidate_selections[collectionID].chosen_candidates[index]);
+
+        // Signify there's been a button click
+        button_change.update(state => ({... state, change: ($button_change.change +=1)%10}));       
 
     }
 </script>

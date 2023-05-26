@@ -22,10 +22,10 @@
 <a href = "#{position}" on:click = {handleClick} style = "text-decoration: none;">
 <div bind:this = {box} class = "parent_container" 
     style = "{outline_style} margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em;">
-    <div>
+    <div> <!-- Position -->
         {position}
-    </div>
-    <div style = "margin-top: 0.5em;">
+    </div> 
+    <div style = "margin-top: 0.5em;"> <!-- Candidate chosen  -->
         <i style = "font-size: 0.9em;">{candidate}</i>
     </div>
 </div>

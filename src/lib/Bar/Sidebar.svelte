@@ -7,14 +7,16 @@
     var seeingElectionName = "";
     var happened = false;
 
+    // If on submission page
     $: if ($user != undefined && $user.elections != undefined && $user.elections.length == $user.pageOn){
         sidebar_width_em.set({
                 width: 0,
                 display: "none"
             });
-    } else {
-        updateSize();
-    }
+        } else {
+            updateSize();
+        }
+
     /* ----------- UPDATING THE SIDEBAR ----------- */
     // Update the first time the user gets on the app
     $: if (electionInfo == undefined && $user.confirmed){
@@ -56,12 +58,15 @@
     {:then electionInfo}
         {#if electionInfo != undefined}
         <div style = "margin-bottom: 2em;">
-            {electionInfo.electionName} Election <!-- Naming the election -->
+            {electionInfo.electionName} Election <!-- Name of the election -->
         </div>
+
+        <!-- Jump to top/bottom of the page -->
         <a href = "#top"><button style = "background-color: {yellow_color};">Top</button></a>
         <a href = "#bottom"><button style = "background-color: {yellow_color};">Bottom</button></a>
         <br><br>
-        <div id = "scroll_container"> <!-- Sidebar boxes -->
+
+        <div id = "scroll_container"> <!-- Sidebar boxes (showing positions + candidate(s)) -->
             <div class = "positions">
                 {#each electionInfo.positions as officerPos}
                     <SidebarBox position = "{officerPos}" />

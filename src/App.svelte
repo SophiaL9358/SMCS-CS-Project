@@ -9,6 +9,7 @@
   import { sidebar_width_em, updateSize, user, resetUser, unsubscribe, red_color, green_color } from "./lib/constants.js";
   import VotingPage from "./lib/Voting/VotingPage.svelte";
   import SignIn from "./lib/Homepage/SignIn.svelte";
+    import ConfirmationPage from "./lib/Homepage/ConfirmationPage.svelte";
 
   // From store of constants.js, need to destroy the unsub variable to prevent memory leaks
   onDestroy(unsubscribe);
@@ -24,27 +25,16 @@
   // If user closes the page, reset their information
   $: if ($user.loggedIn){
     window.onbeforeunload = resetUser;
-  }
-
-  let handleConfirm = () => {
-      user.update(state => ({...state, confirmed: true}));
-
-      sidebar_width_em.set({
-          display: "block",
-          width: $sidebar_width_em.width
-        });
-      updateSize();
-      };
-
+  }  
 </script>
 
 <!-- Bars -->
 <div style = "width: 100%; height: 4em;"></div> <!-- Taking up the space the topbar would've had -->
 <Sidebar />
 <br>
-
 <div id = "top"></div>
-<main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there -->
+
+<main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there ==> put margin -->
  {#if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "PHS SGA Voting" />
 
@@ -55,20 +45,12 @@
     <GoogleAuthButton />
 
   {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page -->
-  <Title text = "PHS SGA Voting" />
-  <center>
-    <div class = "prompt">
-      Is this information correct?
-      <br> NAME: <b>{$user.name}</b> 
-      <br>EMAIL: <b>{$user.email}</b> 
-      <br> GRADE: <b>{$user.grade}</b> <br><br>
-      <button style = "background-color: {red_color};" on:click = {() => {resetUser();}}>No</button>
-      <button style = "background-color: {green_color};" on:click = {handleConfirm}>Yes</button>
-    </div>
-  </center>
+    <Title text = "PHS SGA Voting" />
+    <ConfirmationPage />
 
   {:else}  <!-- VOTING page -->
     <VotingPage />
+
   {/if} 
 </main>
 <div id = "bottom"></div>

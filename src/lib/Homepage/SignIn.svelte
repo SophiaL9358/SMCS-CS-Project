@@ -4,11 +4,10 @@
     import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
     import { construct_svelte_component } from 'svelte/internal';
 
-    let idInput; // id textbox
-    let passwordInput; // password textbox
-    let warning = ""; // warning displayed below
+    let idInput; // ID textbox
+    let passwordInput; // Password textbox
+    let warning = ""; // Warning displayed below
     const DISTRICT_URL = "https://md-mcps-psv.edupoint.com/PXP2_Login.aspx";
-    let response; 
 
     // Submit button being clicked!
     async function handleClick(){
@@ -18,13 +17,13 @@
 
         try {
             // Verify if user exists in StudentVUE
-            response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
+            let response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
             
             // Get firestore data for the PHS ID
             var firebaseIDCallback = getDoc(doc(db, "PHS IDs/"+idInput.value));
             var fbIDResponse = (await firebaseIDCallback).data()
             
-            if (fbIDResponse == undefined) {  // If nothing is returned
+            if (fbIDResponse == undefined) {  // If nothing is returned by firestore
                 document.getElementById("warning").style.color = "red";
                 warning = "Unauthorized user!";
             } else {
@@ -32,10 +31,11 @@
                 var firebaseElectionCallback = getDoc(doc(db, "General Information/"+ fbIDResponse.grade));
                 var fbElectionResponse = (await firebaseElectionCallback).data();
 
-                if (fbElectionResponse == undefined) { // If nothing is returned
+                if (fbElectionResponse == undefined) { // If there's no elections available for user
                     document.getElementById("warning").style.color = "red";
                     warning = "No elections available for Grade " + fbIDResponse.grade+"!";
-                } else { // Occurs when ID is in MCPS and PHS vvv
+                
+                } else { // Occurs when ID is in MCPS and PHS are verified
                     // Update user with new info
                     user.update(state => ({...state, 
                         email: idInput.value + "@mcpsmd.net",
@@ -48,27 +48,26 @@
                         officerOn: "President"
                     }));
 
-                    // TODO: CLEANUP CODE
-                    for (var j = 0; j < $user.elections.length; j++){
+                    // Set up candidate_selection (so user can correctly select candidates)
+                    for (var i = 0; i < $user.elections.length; i++){
                         console.log($user.elections.length);
-                        var collectionID = $user.elections[j];
-                        var thing =  getDoc(doc(db, collectionID + "/All Positions"));
-                        var res =  (await thing).data();
+                        var collectionID = $user.elections[i];
+                        var fbPosResponse =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
                         candidate_selections[collectionID] = {
-                            positions: res.positions,
+                            positions: fbPosResponse.positions,
                             chosen_candidates: []
                         };
-                        // positions is all the posistions in that election
                         
-                        for (var i = 0; i < candidate_selections[collectionID].positions.length; i ++){
-                            var temp = [];
-                            temp.push(candidate_selections[collectionID].positions[i]);
-                            var temp2 = (await getDoc(doc(db, collectionID + "/"+temp[0]+" Information"))).data();
-                            temp.push(temp2.numSelectionsAllowed);
-                            candidate_selections[collectionID].chosen_candidates.push(temp);
+                        for (var j = 0; j < candidate_selections[collectionID].positions.length; j ++){
+                            var res = [];
+                            res.push(candidate_selections[collectionID].positions[j]); // Position name
+                            var fbNumSelectionResponse = (await getDoc(doc(db, collectionID + "/"+res[0]+" Information"))).data();
+                            res.push(fbNumSelectionResponse.numSelectionsAllowed); // Num selections
+                            candidate_selections[collectionID].chosen_candidates.push(res);
                         }
                     }
-                    console.log(candidate_selections);
+                    // DEBUG: console.log(candidate_selections);
+
                     // Reset text from textboxes
                     idInput.value = "";
                     passwordInput.value = "";
@@ -83,9 +82,9 @@
             // If StudentVUE returns an error
             warning = "Username or Password is incorrect!";  
         }
+
         if (document.getElementById("warning") != null){
             document.getElementById("warning").style.color = "red";
-
         }
 
     }
@@ -97,7 +96,6 @@
         }
     });
 
-    
 </script>
 
 <center>
@@ -105,13 +103,14 @@
         <!-- Textboxes -->
         ID: <input type = "text" bind:this = {idInput}> <br>
         Password: <input type = "password" bind:this = {passwordInput}> 
-                <!-- Show password button -->
-                <button style = "height: 1.5em; width: 4em;" on:mousedown = {() => {
-                    passwordInput.type = "text";
-                }} on:mouseup = { () => {
-                    passwordInput.type = "password";
-                }
-                }> Show </button>
+                <!-- Show password button (clicking shows/unshows it) -->
+                <button style = "height: 1.5em; width: 4em;" on:click = {() => {
+                    if (passwordInput.type == "password"){
+                        passwordInput.type = "text";
+                    } else {
+                        passwordInput.type = "password"
+                    }
+                }}> Show </button>
         <br> <br>
 
         <!-- Submit button -->
