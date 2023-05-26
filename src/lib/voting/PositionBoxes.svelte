@@ -22,7 +22,6 @@
             var resCand = (await getDoc(doc(db, collectionID + "/"+position+" "+(i+1)))).data();
             candidates.push([resCand.name, resCand.platform, resCand.video]);
         }
-        console.log(candidates);
     
         return {
             description: resInfo.description,

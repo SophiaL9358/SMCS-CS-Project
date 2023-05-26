@@ -35,7 +35,9 @@ export let user = writable({
 
 // Student selection object
 export let candidate_selections = {};
-
+export let button_change = writable({
+    change: 0
+});
 /*
     let test = {
         Freshman: {

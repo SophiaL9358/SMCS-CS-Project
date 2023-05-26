@@ -13,7 +13,6 @@
 
     // Function to update user information and log the user information
     globalThis.handleCredentialResponse = (response) => {
-      console.log('START');
       let responsePayload = decodeJwtResponse(response.credential);
         
         user.update(state => ({...state, 

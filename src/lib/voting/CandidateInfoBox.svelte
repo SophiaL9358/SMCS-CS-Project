@@ -1,20 +1,28 @@
 <script>
     import { doc, getDoc } from "firebase/firestore";
-    import { user, db, candidate_selections } from "../constants";
+    import { user, db, candidate_selections, button_change, green_color } from "../constants";
 
     let button; 
+    let index;
 
     export let candidate; // Candidate information
     export let candPosition; // ex. Pres, VP
     $: collectionID = $user.elections[$user.pageOn];
     $: index = candidate_selections[collectionID].positions.indexOf(candPosition);
-    $: if (button != undefined && candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) == -1){
-        button.innerHTML = "jlkljk!";
-    } else if (button != undefined) {
-        button.innerHTML = "VOTED!";
-    }
+
+    $: if (button != undefined && $button_change.change >=0 ){
+        if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
+            button.innerHTML = "VOTED!";
+            button.style.backgroundColor = green_color;
+        } else {
+            button.innerHTML = "Click here to vote!";
+            button.style.backgroundColor = "initial";
+        }
+        
+    } 
+
     async function handleVoteClick(){
-        console.log(candidate_selections);
+
         if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
             // if candidate was voted for
             console.log("option 1");
@@ -41,6 +49,7 @@
             - If space ==> Add person
         3. Update button
         */
+       button_change.update(state => ({... state, change: ($button_change.change +=1)%10}));       
 
     }
 </script>

@@ -49,25 +49,26 @@
                     }));
 
                     // TODO: CLEANUP CODE
-                    var collectionID = $user.elections[$user.pageOn];
-                    var thing =  getDoc(doc(db, collectionID + "/All Positions"));
-                    var res =  (await thing).data();
-                    candidate_selections[collectionID] = {
-                        positions: res.positions,
-                        chosen_candidates: []
-                    };
-                    // positions is all the posistions in that election
-                    console.log(candidate_selections);
-                    for (var i = 0; i < candidate_selections[collectionID].positions.length; i ++){
-                        console.log();
-                        var temp = [];
-                        temp.push(candidate_selections[collectionID].positions[i]);
-                        var temp2 = (await getDoc(doc(db, collectionID + "/"+temp[0]+" Information"))).data();
-                        temp.push(temp2.numSelectionsAllowed);
-                        candidate_selections[collectionID].chosen_candidates.push(temp);
+                    for (var j = 0; j < $user.elections.length; j++){
+                        console.log($user.elections.length);
+                        var collectionID = $user.elections[j];
+                        var thing =  getDoc(doc(db, collectionID + "/All Positions"));
+                        var res =  (await thing).data();
+                        candidate_selections[collectionID] = {
+                            positions: res.positions,
+                            chosen_candidates: []
+                        };
+                        // positions is all the posistions in that election
+                        
+                        for (var i = 0; i < candidate_selections[collectionID].positions.length; i ++){
+                            var temp = [];
+                            temp.push(candidate_selections[collectionID].positions[i]);
+                            var temp2 = (await getDoc(doc(db, collectionID + "/"+temp[0]+" Information"))).data();
+                            temp.push(temp2.numSelectionsAllowed);
+                            candidate_selections[collectionID].chosen_candidates.push(temp);
+                        }
                     }
                     console.log(candidate_selections);
-                    
                     // Reset text from textboxes
                     idInput.value = "";
                     passwordInput.value = "";
