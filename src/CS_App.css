@@ -31,8 +31,9 @@ button:hover {
 .prompt {
   opacity: 80%;
   background-color: white;
-  width: 30%;
+  width: 35%;
   padding: 1em 2em 1em 2em;
+  min-width: 280px;
 }
 
 .red {
