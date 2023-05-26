@@ -31,6 +31,7 @@
                 // someone missing
                 people.push("<b class = 'red'>NONE</b>")
             } else {
+                // someone chosen
                 console.log("option 3");
                 people.push("<b>" + posInfoList[i]+"</b>");
             }
