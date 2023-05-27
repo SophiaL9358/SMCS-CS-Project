@@ -19,22 +19,25 @@ button {
   font-size: 0.8em;
   display: inline-block;
   width: 7em;
-  height: 3em;
+  height: 2.75em;
   font-weight: bold;
   transition: 0.25s;
+  border-radius: 5px;
 
 }
 
 button:hover {
   cursor: pointer;
+  background-color: rgba(255, 218, 26, 1);
 }
 
 .prompt {
-  opacity: 80%;
+  opacity: 75%;
   background-color: white;
   width: 35%;
   padding: 1em 2em 1em 2em;
   min-width: 280px;
+  
 }
 
 .red {

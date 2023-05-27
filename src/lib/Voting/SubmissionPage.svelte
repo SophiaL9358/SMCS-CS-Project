@@ -83,7 +83,7 @@
     }
 </script>
 
-<center><div class = "prompt">
+<center><div class = "prompt" style = "border-radius: 25px;">
     <b><i>Submission Page</i></b>
     <br>
     You have voted for:<br>
