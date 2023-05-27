@@ -5,7 +5,7 @@ body {
     font-size: 1.05em;
     font-family:'Gill Sans', 'Gill Sans MT', Tahoma, sans-serif;
     background-color: black;
-    background-image: url('./assets/falcon_bg_black_overlay.png');    
+    background-image: url('docs/falcon_bg_black_overlay_1.png');    
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
