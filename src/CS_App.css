@@ -4,12 +4,7 @@ body {
 
     font-size: 1.05em;
     font-family:'Gill Sans', 'Gill Sans MT', Tahoma, sans-serif;
-    background-color: black;
-    background-image: url('smcs-cs-project/assets/falcon_bg_black_overlay_1.png');    
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+    
     
 
 }
@@ -32,7 +27,7 @@ button:hover {
 }
 
 .prompt {
-  opacity: 75%;
+  opacity: 90%;
   background-color: white;
   width: 35%;
   padding: 1em 2em 1em 2em;
