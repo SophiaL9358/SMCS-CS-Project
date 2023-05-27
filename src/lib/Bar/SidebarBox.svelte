@@ -9,9 +9,10 @@
         //opacity is changed in Sidebar.svelte
         box.style.color = "black";
     } else if (box) {
-        box.style.backgroundColor = "rgb(60, 60, 60)";
+        box.style.backgroundColor = "black";
         box.style.color = "white";
     }
+    // lighter black color - rgb(60, 60, 60)
 
     // When clicking on a box
     let candidate_text = "Processing...";

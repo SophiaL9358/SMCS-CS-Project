@@ -99,12 +99,14 @@
 </script>
 
 <center>
-    <div class = "prompt">
+    <div class = "prompt" style = "width:30%;">
         <!-- Textboxes -->
-        ID: <input type = "text" bind:this = {idInput}> <br>
-        Password: <input type = "password" bind:this = {passwordInput}> 
+        MCPS ID: 
+        <input style = "width: 50%; min-width: 150px;" type = "text" bind:this = {idInput} placeholder="Student ID"> <br>
+        Password:
+        <input style = "width: 35%; min-width: 100px;" type = "password" bind:this = {passwordInput} placeholder="Password"> 
                 <!-- Show password button (clicking shows/unshows it) -->
-                <button style = "height: 1.5em; width: 4em;" on:click = {() => {
+                <button style = "height: 1.65em; width: 15%; min-width: 50px;" on:click = {() => {
                     if (passwordInput.type == "password"){
                         passwordInput.type = "text";
                     } else {

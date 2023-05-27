@@ -88,7 +88,7 @@
     #scroll_container {
         position: relative;
         height: inherit;
-        height: 70%;
+        height: 60%;
         overflow-y: scroll;
         overflow-x:hidden;
     }
