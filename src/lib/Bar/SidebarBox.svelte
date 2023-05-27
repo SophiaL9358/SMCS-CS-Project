@@ -6,6 +6,7 @@
     let box;
     $: if (box && $user.officerOn == position){
         box.style.backgroundColor = yellow_color;
+        //opacity is changed in Sidebar.svelte
         box.style.color = "black";
     } else if (box) {
         box.style.backgroundColor = "rgb(60, 60, 60)";

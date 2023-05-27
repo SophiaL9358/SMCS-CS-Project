@@ -57,7 +57,7 @@
 
     {:then electionInfo}
         {#if electionInfo != undefined}
-        <div style = "margin-bottom: 2em;">
+        <div style = "margin-bottom: 1.25em; margin-top: 1.5em">
             {electionInfo.electionName} Election <!-- Name of the election -->
         </div>
 
@@ -82,7 +82,7 @@
         position: fixed;
         padding-top: 1em;
         height: 100%;
-        background-color: black;
+        background-color: rgba(0, 0, 0, 0.5);
         
     }
     #scroll_container {
