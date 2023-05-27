@@ -45,7 +45,7 @@ let test = {
         positions: ["President", "Vice President", "Secretary", "Treasurer", "Leadership Team Representative"],
         candidate: [[President, 1],
                     [Vice President, 2],
-                    [1],
+                    [Secretary, 0, bob],
                     [1],
                     [1]]
     },

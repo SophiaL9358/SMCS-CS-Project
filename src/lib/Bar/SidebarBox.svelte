@@ -30,7 +30,6 @@
         let res = [];
         for (let i = 2; i < posInfoList.length + posInfoList[1]; i ++){
             if (i >= posInfoList.length){
-                console.log(posInfoList[i]);
                 res.push("No Candidate Chosen");
             } else {
                 res.push(posInfoList[i]);

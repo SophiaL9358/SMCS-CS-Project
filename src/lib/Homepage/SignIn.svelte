@@ -50,7 +50,6 @@
 
                     // Set up candidate_selection (so user can correctly select candidates)
                     for (var i = 0; i < $user.elections.length; i++){
-                        console.log($user.elections.length);
                         var collectionID = $user.elections[i];
                         var fbPosResponse =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
                         candidate_selections[collectionID] = {
