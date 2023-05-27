@@ -99,14 +99,14 @@
 </script>
 
 <center>
-    <div class = "prompt" style = "width:30%;">
+    <div class = "prompt" style = "width: 40%; border-radius: 25px;">
         <!-- Textboxes -->
         MCPS ID: 
-        <input style = "width: 50%; min-width: 150px;" type = "text" bind:this = {idInput} placeholder="Student ID"> <br>
+        <input style = "width: 50%; min-width: 100px; margin-top: 0.7em;" type = "text" bind:this = {idInput} placeholder="Student ID"> <br>
         Password:
-        <input style = "width: 35%; min-width: 100px;" type = "password" bind:this = {passwordInput} placeholder="Password"> 
+        <input style = "width: 50%; min-width: 100px; margin-top: 0.6em;" type = "password" bind:this = {passwordInput} placeholder="Password"> <br>
                 <!-- Show password button (clicking shows/unshows it) -->
-                <button style = "height: 1.65em; width: 15%; min-width: 50px;" on:click = {() => {
+                <button style = "height: 1.6em; width: 15%; min-width: 50px; margin-top: 0.3em;" on:click = {() => {
                     if (passwordInput.type == "password"){
                         passwordInput.type = "text";
                     } else {
@@ -116,9 +116,9 @@
         <br> <br>
 
         <!-- Submit button -->
-        <button id = "submit_button" on:click = {handleClick}>Submit</button>
+        <button style = "margin-top: -0.2em;"id = "submit_button" on:click = {handleClick}>Submit</button>
         
-        <!-- Warning -->
+        <!-- Warning for invalid credentials -->
         <p id = "warning">{warning}</p>
     </div>
 </center>

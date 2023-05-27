@@ -113,7 +113,7 @@ window.addEventListener("resize", updateSize);
 /* ----------- OTHER CONSTANTS (color, sizes, styles, etc.) ----------- */
 export const title_size_em = 3;
 export const subtitle_size_em = 1.5;
-export const yellow_color = "rgba(255, 218, 26, 1)";
+export const yellow_color = "rgba(252, 204, 45, 1)";
 export const red_color = "rgb(248, 72, 72, 0.7)";
 export const green_color = "rgb(101, 255, 144, 0.7)"
 export const outline_width_em = 0.3;
