@@ -3,7 +3,7 @@ body {
     text-align: center;
 
     font-size: 1.05em;
-
+    font-family:'Gill Sans', 'Gill Sans MT', Tahoma, sans-serif;
     background-color: black;
     background-image: url('./assets/falcon_bg_black_overlay.png');    
     background-repeat: no-repeat;
