@@ -30,7 +30,8 @@ export let user = writable({
     grade: undefined,
     elections: undefined,
     pageOn: undefined,
-    officerOn: undefined
+    officerOn: undefined,
+    voted: false
 });
 
 // Student candidate selection object - keeps track of candidates the user has voted for
@@ -62,7 +63,8 @@ export function resetUser() {
         grade: undefined,
         elections: undefined,
         pageOn: undefined,
-        officerOn: undefined
+        officerOn: undefined,
+        voted: false
     });
     sidebar_width_em.set({
         width: 15,
@@ -71,7 +73,7 @@ export function resetUser() {
     candidate_selections = {};
 }
 
-/*  Need to sumbsribe confirmedValue to the value of the user's, 
+/*  Need to subscribe confirmedValue to the value of the user's, 
     since $user.confirmed doesn't work in JS files :|
     Must be destroyed in a svelte file, so it's exported and destroye in App.svelte
 */
