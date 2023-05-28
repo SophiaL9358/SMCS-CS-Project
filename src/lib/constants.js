@@ -25,12 +25,13 @@ export const db = getFirestore(app);
 export let user = writable({
     confirmed: false,
     name:undefined, 
-    email:undefined, 
+    ID:undefined, 
     loggedIn: false,
     grade: undefined,
     elections: undefined,
     pageOn: undefined,
-    officerOn: undefined
+    officerOn: undefined, 
+    voted: false
 });
 
 // Student candidate selection object - keeps track of candidates the user has voted for
@@ -56,13 +57,14 @@ let test = {
 export function resetUser() {
     user.set({
         name:undefined, 
-        email:undefined, 
+        ID:undefined, 
         loggedIn: false, 
         confirmed: false,
         grade: undefined,
         elections: undefined,
         pageOn: undefined,
-        officerOn: undefined
+        officerOn: undefined,
+        voted: false
     });
     sidebar_width_em.set({
         width: 15,

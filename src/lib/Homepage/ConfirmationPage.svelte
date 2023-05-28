@@ -18,7 +18,7 @@
       Is this information correct?
       <br style = "line-height:40px;">
       <br> NAME: <b>{$user.name}</b> 
-      <br>EMAIL: <b>{$user.email}</b> 
+      <br>ID: <b>{$user.ID}</b> 
       <br> GRADE: <b>{$user.grade}</b> <br><br>
       
       <button style = "background-color: {red_color};" on:click = {() => {resetUser();}}>No</button>

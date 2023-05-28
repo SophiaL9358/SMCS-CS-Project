@@ -1,5 +1,5 @@
 <script>
-    import { doc, getDoc, updateDoc } from "firebase/firestore";
+    import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
     import { candidate_selections, db, green_color, resetUser, user  } from "../constants";
 
     /*
@@ -38,14 +38,14 @@
 
         return res;
     }
-
+    let warning ="";
     async function submitVote(){
         if (confirm("Are you sure you want to submit your vote? \nYou cannot change your vote after you submit!")){
-            resetUser();
-        } else {
+            // RECORD USERS VOTE
             // i = election #
             // j = officer position #
             // k = cand position #
+            warning = "PROCESSING SUBMISSION... PLEASE BE PATIENT";
             for (let i = 0; i < $user.elections.length; i ++){ // loop through elections (ie. junior, WS)
                 let collectionID = $user.elections[i];
                 let positionsAvailable = candidate_selections[collectionID].positions;
@@ -65,20 +65,19 @@
                         await updateDoc(doc(db, collectionID, ""+officerPosition+" "+candIndex), {
                             votes: candVotes+1
                         });
-                        console.log(user_selections[j][k] + " || "+officerPosition+ " "+candIndex + " "+ candVotes + " || "+ collectionID);
                     }
 
                 }
             }
-            /*
-            $user.elections.forEach(collectionID => { 
-                candidate_selections[collectionID].positions.forEach(officerPosition =>{ 
-                    let fbPosResponse = (await getDoc(doc(db, collectionID + "/"+officerPosition + " Information"))).data();
-                    let candIndex = 
-                    console.log(officerPosition);
-                });
-            });*/
-        }
+            
+            // PUT ID INTO A STUDENTS WHO HAVE ALREADY VOTED LIST
+            await setDoc (doc(db, "Students Voted", $user.ID),{});
+            resetUser();
+            user.update(state => ({... state , 
+                voted: true
+            }));
+            warning = "";
+        } 
         
     }
 </script>
@@ -116,4 +115,6 @@
     <!-- SUBMISSION CONSTANT STUFF -->
     <p class = "red">Once you submit, you cannot edit your vote!</p>
     <button style = "background-color: {green_color};" on:click = {submitVote}>Submit</button>
+    <br><br>
+    <div>{warning}</div>
 </div></center>

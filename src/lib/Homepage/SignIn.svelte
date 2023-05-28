@@ -20,13 +20,21 @@
             let response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
             
             // Get firestore data for the PHS ID
+            var firebaseVotedCallback = getDoc(doc(db, "Students Voted/"+idInput.value));
+            var fbVotedResponse = (await firebaseVotedCallback).data()
+            
+
             var firebaseIDCallback = getDoc(doc(db, "PHS IDs/"+idInput.value));
             var fbIDResponse = (await firebaseIDCallback).data()
             
             if (fbIDResponse == undefined) {  // If nothing is returned by firestore
                 document.getElementById("warning").style.color = "red";
                 warning = "Unauthorized user!";
-            } else {
+            } else if (fbVotedResponse != undefined){
+                // IF USER HAS ALREADY VOTED
+                document.getElementById("warning").style.color = "red";
+                warning = "You have already voted!";
+            }else {
                 // Get firestore data for the elections they're supposed to do
                 var firebaseElectionCallback = getDoc(doc(db, "General Information/"+ fbIDResponse.grade));
                 var fbElectionResponse = (await firebaseElectionCallback).data();
@@ -38,7 +46,7 @@
                 } else { // Occurs when ID is in MCPS and PHS are verified
                     // Update user with new info
                     user.update(state => ({...state, 
-                        email: idInput.value + "@mcpsmd.net",
+                        ID: idInput.value,
                         name: fbIDResponse.first_name + " "+fbIDResponse.last_name,
                         loggedIn: true,
                         confirmed: false,

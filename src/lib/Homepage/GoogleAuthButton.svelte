@@ -16,7 +16,7 @@
       let responsePayload = decodeJwtResponse(response.credential);
         
         user.update(state => ({...state, 
-            email: responsePayload.email,
+            ID: responsePayload.email,
             name: responsePayload.name,
             loggedIn: true,
             grade: 2025 // TODO: Assigns grade based on database
