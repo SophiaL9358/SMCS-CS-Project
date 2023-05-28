@@ -60,10 +60,8 @@
     // Retrieve data and put onto the variable 'electionInfo'
     async function getElectionName(){ 
         var collectionID = $user.elections[$user.pageOn];
-        console.log(collectionID);
 
         var res =  (await getDoc(doc(db, collectionID + "/All Positions"))).data();
-        console.log(res);
         if (res == undefined){
             return; // If there's no more pages, return nothing
         }
