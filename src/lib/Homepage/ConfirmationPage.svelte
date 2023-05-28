@@ -14,10 +14,9 @@
 
 </script>
 <center>
-    <div class = "prompt">
+    <div class = "prompt" style = "border-radius:25px;">
       Is this information correct?
-      <br style=
-      "line-height:40px">
+      <br style = "line-height:40px;">
       <br> NAME: <b>{$user.name}</b> 
       <br>EMAIL: <b>{$user.email}</b> 
       <br> GRADE: <b>{$user.grade}</b> <br><br>
