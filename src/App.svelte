@@ -35,7 +35,23 @@
 <div id = "top"></div>
 
 <main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there ==> put margin -->
- {#if !$user.loggedIn} <!-- LOGIN page -->
+  
+  
+ 
+  {#if $user.voteProcessed} <!-- Shows if vote has been recorded -->
+    <center><br><div class = "prompt">
+    <b style = "color: green;">Your vote has been recorded! </b>
+    <br> Thank you for voting on this application!
+    <br> This page can be closed now.
+  </div></center>
+  
+  {:else if $user.voted} <!-- Shows if vote is submitted and is being processed -->
+    <center><br><div class = "prompt">
+    Your vote is being processed! 
+    <br> <b class = "red">Please do not close the page yet!</b>
+    </div></center>
+
+ {:else if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "PHS SGA Voting" />
 
     <Subtitle text = "Student Sign In" />

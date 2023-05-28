@@ -31,7 +31,8 @@ export let user = writable({
     elections: undefined,
     pageOn: undefined,
     officerOn: undefined, 
-    voted: false
+    voted: false,
+    voteProcessed: false
 });
 
 // Student candidate selection object - keeps track of candidates the user has voted for
@@ -64,7 +65,8 @@ export function resetUser() {
         elections: undefined,
         pageOn: undefined,
         officerOn: undefined,
-        voted: false
+        voted: false,
+        voteProcessed: false
     });
     sidebar_width_em.set({
         width: 15,

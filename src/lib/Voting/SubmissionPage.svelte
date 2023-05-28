@@ -38,14 +38,15 @@
 
         return res;
     }
-    let warning ="";
     async function submitVote(){
         if (confirm("Are you sure you want to submit your vote? \nYou cannot change your vote after you submit!")){
             // RECORD USERS VOTE
             // i = election #
             // j = officer position #
             // k = cand position #
-            warning = "PROCESSING SUBMISSION... PLEASE BE PATIENT";
+            user.update(state => ({... state , 
+                voted: true
+            }));
             for (let i = 0; i < $user.elections.length; i ++){ // loop through elections (ie. junior, WS)
                 let collectionID = $user.elections[i];
                 let positionsAvailable = candidate_selections[collectionID].positions;
@@ -69,14 +70,13 @@
 
                 }
             }
-            
             // PUT ID INTO A STUDENTS WHO HAVE ALREADY VOTED LIST
             await setDoc (doc(db, "Students Voted", $user.ID),{});
             resetUser();
             user.update(state => ({... state , 
-                voted: true
+                voted: true,
+                voteProcessed: true
             }));
-            warning = "";
         } 
         
     }
@@ -116,5 +116,4 @@
     <p class = "red">Once you submit, you cannot edit your vote!</p>
     <button style = "background-color: {green_color};" on:click = {submitVote}>Submit</button>
     <br><br>
-    <div>{warning}</div>
 </div></center>

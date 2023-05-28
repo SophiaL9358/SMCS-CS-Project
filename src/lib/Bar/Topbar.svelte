@@ -5,7 +5,9 @@
 
     // Setting "Login" text
     $: text = () => {
-        if ($user.confirmed) {
+        if ($user.voted){
+            return "";
+        } else if ($user.confirmed) {
             return $user.name;
         } else {
             return "Login";
@@ -14,7 +16,7 @@
 
     // Visibility of signout button
     let sign_out_button;
-    $: if ($user.confirmed && sign_out_button != undefined){
+    $: if (!$user.voted && $user.confirmed && sign_out_button != undefined){
         sign_out_button.style.display = "initial";
     } else if (sign_out_button != undefined) {
         sign_out_button.style.display = "none";
