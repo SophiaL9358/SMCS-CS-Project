@@ -56,9 +56,6 @@
 
     <Subtitle text = "Student Sign In" />
     <SignIn />
-    <br><br>
-    <Subtitle text = "Teacher Sign In" />
-    <GoogleAuthButton />
 
   {:else if $user.loggedIn && !$user.confirmed}  <!-- CONFIRM page -->
     <Title text = "PHS SGA Voting" />
