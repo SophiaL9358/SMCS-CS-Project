@@ -82,7 +82,7 @@
     }
 </script>
 
-<center><div class = "prompt" style = "border-radius: 25px;">
+<div class = "center-parent-container"><div class = "prompt" style = "border-radius: 25px;">
     <b><i>Submission Page</i></b>
     <br>
     You have voted for:<br>
@@ -116,4 +116,4 @@
     <p class = "red">Once you submit, you cannot edit your vote!</p>
     <button style = "background-color: {green_color};" on:click = {submitVote}>Submit</button>
     <br><br>
-</div></center>
+</div></div>

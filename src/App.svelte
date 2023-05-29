@@ -39,17 +39,17 @@
   
  
   {#if $user.voteProcessed} <!-- Shows if vote has been recorded -->
-    <center><br><div class = "prompt">
+    <div class = "center-parent-container"><br><div class = "prompt">
     <b style = "color: green;">Your vote has been recorded! </b>
     <br> Thank you for voting on this application!
     <br> This page can be closed now.
-  </div></center>
+  </div></div>
   
   {:else if $user.voted} <!-- Shows if vote is submitted and is being processed -->
-    <center><br><div class = "prompt">
+    <div class = "center-parent-container"><br><div class = "prompt">
     Your vote is being processed! 
     <br> <b class = "red">Please do not close the page yet!</b>
-    </div></center>
+    </div></div>
 
  {:else if !$user.loggedIn} <!-- LOGIN page -->
     <Title text = "PHS SGA Voting" />

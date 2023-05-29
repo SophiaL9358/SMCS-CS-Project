@@ -13,7 +13,7 @@
     }
 
 </script>
-<center>
+<div class = "center-parent-container">
     <div class = "prompt" style = "border-radius:25px;">
       Is this information correct?
       <br style = "line-height:40px;">
@@ -24,4 +24,4 @@
       <button style = "background-color: {red_color};" on:click = {() => {resetUser();}}>No</button>
       <button style = "background-color: {green_color};" on:click = {handleConfirm}>Yes</button>
     </div>
-</center>
+  </div>

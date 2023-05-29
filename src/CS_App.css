@@ -38,3 +38,9 @@ button:hover {
 .red {
   color: red;
 }
+
+.center-parent-container {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}

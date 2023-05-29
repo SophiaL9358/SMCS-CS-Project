@@ -99,10 +99,10 @@ export let sidebar_width_em = writable({
 export function updateSize() {
     windowWidth = window.innerWidth;
     if (confirmedValue[0] && !(confirmedValue[1] == confirmedValue[2].length)) {
-        if (windowWidth < 800){ // Hide sidebar if window width less than 800 px
+        if (windowWidth < 700){ // Hide sidebar if window width less than 800 px
             sidebar_width_em.set({
                 width: 0,
-                display: "none"
+                display: "none" 
             });
         } else {
             sidebar_width_em.set({

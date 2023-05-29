@@ -53,63 +53,37 @@
 
     }
 </script>
+<div class = "center-parent-container">
+<div id = "box">
+    <!-- Candidate name -->
+    <h3 style = "display: inline-block;">{candidate.name}</h3> 
 
-<div class = "parent_container">
-    <div id = "box">
-        <!-- Candidate name -->
-        <h3 style = "display: inline-block;">{candidate.name}</h3> 
-
-        <!-- Vote button -->
-        <button bind:this = {button} on:click = {handleVoteClick} style = "float: right; display: inline-block;">Click here to Vote!</button>
-        
-        <!-- Content -->
-        <div id = "content">
-            <!-- Video -->
-            <iframe title = "Candidate Video"
-                src="{candidate.video}" id = "video" allowfullscreen/>
-            
-            <!-- Platform -->
-            <div id = "platform"> 
-                <p>1. {candidate.platform[0]}</p>
-                <p>2. {candidate.platform[1]}</p>
-                <p>3. {candidate.platform[2]}</p>
-                
+    <!-- Vote button -->
+    <button bind:this = {button} on:click = {handleVoteClick} style = "float: right; display: inline-block;">Click here to Vote!</button>
+    
+    <!-- Content -->
+    <div id = "content">
+        <!-- Video -->
+        <div id = "videoParentContainer">
+            <div id = "videoWrapper">
+                <iframe title = "Candidate Video"
+                    src="{candidate.video}" allowfullscreen/>
             </div>
         </div>
+        
+        <!-- Platform -->
+        <div id = "platform"> 
+            {#each candidate.platform as platform, i}
+            <p>{i+1}. {platform}</p>
+            {/each}
+            
+        </div>
     </div>
+</div>
 </div>
 <br><br>
 
 <style>
-    #content {
-        width: 100%;
-        display: flex;
-        justify-content: left;
-    }
-    #box iframe {
-        min-width: 60%;
-        min-height: 300px;
-        top: 0;
-        left: 0;
-        float: left;
-
-        margin-right: 1.5em;
-        margin-bottom: 2em;
-
-    }
-    @media screen and (max-width: 800px) {
-        #box iframe {
-        min-width: 100%;
-
-        }
-        #content {
-            display:block;
-            
-        }
-   }
-    #platform {
-        width: inherit;
-    }
     #box {
         text-align: left;
         width: 75%;
@@ -117,9 +91,52 @@
         padding: 1em 2em 2em 2em;
         max-width: 800px;
     }
-    .parent_container {
+
+    
+    #content {
         display: flex;
+        overflow-wrap: break-word;
+
         width: 100%;
-        justify-content: center;
     }
+    #videoParentContainer{ 
+        width: 60%;
+    }
+    #videoWrapper {
+        position: relative;
+        
+        height: 0;
+        padding-bottom: 56.25%;
+        margin-right: 1.5em;
+        margin-bottom: 2em;
+    }
+    #videoWrapper iframe {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        
+
+    }
+    @media screen and (max-width: 900px) {
+        #videoParentContainer{
+            width: 100%;
+
+        }
+        #content {
+            display:block;
+            
+        }
+        #platform {
+            width: 100% !important; 
+            display:block;
+        }
+   }
+    #platform {
+        display: inline-block;
+        width: 35%;
+    }
+    
 </style>

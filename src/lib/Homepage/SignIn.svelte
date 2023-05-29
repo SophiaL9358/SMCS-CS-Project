@@ -105,7 +105,7 @@
 
 </script>
 
-<center>
+<div class = "center-parent-container">
     <div class = "prompt" style = "width: 40%; border-radius: 25px;">
         <!-- Textboxes -->
         MCPS ID: 
@@ -128,7 +128,7 @@
         <!-- Warning for invalid credentials -->
         <p id = "warning">{warning}</p>
     </div>
-</center>
+</div>
 
 <style>
     div p {

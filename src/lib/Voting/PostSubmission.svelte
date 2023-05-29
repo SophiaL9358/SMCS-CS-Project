@@ -4,7 +4,7 @@
 
 
 </script>
-<center>
+<div class = "center-parent-container">
     <div class = "prompt" style = "border-radius:25px;"> 
       Your vote has been recorded.
       <br style = "line-height:40px;"> 
@@ -12,4 +12,4 @@
       <br>
       <button style = "background-color: {green_color};" on:click = {() => {resetUser();}}>Sign out</button>
     </div>
-</center>
+  </div>
