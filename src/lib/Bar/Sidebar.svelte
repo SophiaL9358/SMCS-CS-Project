@@ -53,12 +53,12 @@
     var sidebarComp;
     function scrollContainerResize(){
         if (sidebarComp != null){
-            sidebarComp.style.height = (window.innerHeight-215) +"px";
+            sidebarComp.style.height = (window.innerHeight-230) +"px";
         }
         
     }
     window.addEventListener("resize", scrollContainerResize);
-    $: if (sidebarComp != null && $user.pageOn >0){
+    $: if ( sidebarComp != null && $user.pageOn >=0){
         scrollContainerResize();
     }
 </script>
