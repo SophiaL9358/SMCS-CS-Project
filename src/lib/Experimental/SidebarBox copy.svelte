@@ -44,7 +44,7 @@
 
 <a href = "#{position}" on:click = {handleClick} style = "text-decoration: none;">
 <div bind:this = {box} class = "parent_container" 
-    style = "{outline_style} margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em;">
+    style = "{outline_style} margin-top: {outline_width_em}em; width: 100%;">
     <div> <!-- Position -->
         {position}
     </div> 

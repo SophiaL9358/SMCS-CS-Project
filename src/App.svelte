@@ -10,6 +10,7 @@
   import VotingPage from "./lib/Voting/VotingPage.svelte";
   import SignIn from "./lib/Homepage/SignIn.svelte";
     import ConfirmationPage from "./lib/Homepage/ConfirmationPage.svelte";
+    import Sidebarcopy from "./lib/Experimental/Sidebar copy.svelte";
 
   // From store of constants.js, need to destroy the unsub variable to prevent memory leaks
   onDestroy(unsubscribe);
@@ -35,8 +36,7 @@
 <div id = "top"></div>
 
 <main style = "margin-left: {main_margin_left_em}em;"> <!-- if sidebar is there ==> put margin -->
-  
-  
+
  
   {#if $user.voteProcessed} <!-- Shows if vote has been recorded -->
     <div class = "center-parent-container"><br><div class = "prompt">
@@ -69,3 +69,7 @@
 <div id = "bottom"></div>
 
 <Topbar /> <!-- So it can be on top of everything-->
+<!-- {#if $user.confirmed}
+  <Sidebarcopy />
+
+{/if} -->

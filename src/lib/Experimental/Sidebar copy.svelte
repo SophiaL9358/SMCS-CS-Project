@@ -1,7 +1,7 @@
 <script>
     import { doc, getDoc } from 'firebase/firestore';
     import { yellow_color, db, user, outline_width_em, outline_style, sidebar_width_em, updateSize } from '../constants.js';
-    import SidebarBox from './SidebarBox.svelte';
+    import SidebarBoxcopy from './SidebarBox copy.svelte';
 
     var electionInfo;
     var seeingElectionName = "";
@@ -41,7 +41,6 @@
             return;
         }
         seeingElectionName = res.electionName;
-
         return {
             electionName: res.electionName,
             positions: res.positions,
@@ -49,23 +48,19 @@
         };
     }
 
-    // CONTROLLING SIDEBAR HEIGHT 
-    var sidebarComp;
+    var duckme;
     function scrollContainerResize(){
-        if (sidebarComp != null){
-            sidebarComp.style.height = (window.innerHeight-215) +"px";
+        if (duckme != null){
+            duckme.style.height = (window.innerHeight-180) +"px";
         }
         
     }
     window.addEventListener("resize", scrollContainerResize);
-    $: if (sidebarComp != null && $user.pageOn >0){
-        scrollContainerResize();
-    }
 </script>
 
 <div id = "sidebar" 
-    style = "{outline_style} color: {yellow_color}; margin-top: {outline_width_em}em; width: {$sidebar_width_em.width}em; display: {$sidebar_width_em.display};">
-    
+    style = "{outline_style} color: {yellow_color};">
+
     {#await electionInfo}
         <p> Processing...</p> <!-- Waiting for firestore -->
 
@@ -80,12 +75,10 @@
         <a href = "#bottom"><button style = "background-color: {yellow_color};">Bottom</button></a>
         <br><br>
 
-        <div bind:this = {sidebarComp} id = "scroll_container"> <!-- Sidebar boxes (showing positions + candidate(s)) -->
-            <div class = "positions">
-                {#each electionInfo.positions as officerPos}
-                    <SidebarBox position = "{officerPos}" />
-                {/each}
-            </div>
+        <div bind:this = {duckme} id = "scroll_container"> <!-- Sidebar boxes (showing positions + candidate(s)) -->
+            {#each electionInfo.positions as officerPos}
+                <SidebarBoxcopy position = "{officerPos}" />
+            {/each}
         </div>
         {/if}
     {/await}        
@@ -95,19 +88,22 @@
     #sidebar {
         position: fixed;
         padding-top: 1em;
+        top:0;
+        left:0;
+        bottom:0;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
         
     }
     #scroll_container {
-        position: relative;
+        width: 100%;
+        justify-content: center;
         overflow-y: scroll;
         overflow-x:hidden;
+        background-color: aqua;
     }
-    .positions { /* mostly for debugging*/
-        background-color: rgb(30, 30, 30);
-        
-    }
+
     #scroll_container::-webkit-scrollbar{
     display: none;
   }
