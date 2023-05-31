@@ -79,6 +79,15 @@
         <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->
     {:then electionInfo}
         <Title text = "{electionInfo.electionName} Election" />
+        <div class = "center-parent-container">
+            <div class = "prompt" style = "max-width: 800px; width: 75%;">
+                <b>Directions: </b> <b>Click <i>anywhere</i> on the box enclosing the candidate's information 
+                to vote for them!</b> Use the sidebar to jump between officer positions. When you vote for a 
+                candidate, their name will appear on the left sidebar. Use the Back/Next to move between 
+                different elections and the submission screen. Submit your vote once you're done!
+            </div>
+        </div>
+        <br>
 
         <!-- Top buttons -->
         <button bind:this = {topBackButton} on:click = {handleBackButtonClick}>Back</button>

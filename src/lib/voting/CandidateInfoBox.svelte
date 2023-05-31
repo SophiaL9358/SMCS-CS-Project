@@ -3,6 +3,7 @@
 
     let button; // Vote button
     let index; // Index holding what position the candidate is running for
+    let box; // Candidate box
 
     export let candidate; // Candidate information
     export let candPosition; // ex. Pres, VP
@@ -14,9 +15,11 @@
         if (candidate_selections[collectionID].chosen_candidates[index].indexOf(candidate.name) != -1){
             button.innerHTML = "VOTED!";
             button.style.backgroundColor = green_color;
+            box.style.backgroundColor = "rgb(101, 255, 144, 0.8)";
         } else {
-            button.innerHTML = "Click here to vote!";
+            button.innerHTML = "Click anywhere to vote!";
             button.style.backgroundColor = "initial";
+            box.style.backgroundColor = "white";
         }
         
     } 
@@ -54,13 +57,16 @@
     }
 </script>
 <div class = "center-parent-container">
-<div id = "box">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id = "box" bind:this = {box} on:click = {handleVoteClick}>
     <!-- Candidate name -->
     <h3 style = "display: inline-block;">{candidate.name}</h3> 
+    <h4 style = "display: inline-block;">(Running for:  {candPosition})</h4>
 
     <!-- Vote button -->
-    <button bind:this = {button} on:click = {handleVoteClick} style = "float: right; display: inline-block;">Click here to Vote!</button>
+    <button bind:this = {button} style = "float: right; display: inline-block; width: 10em;">Click Anywhere to Vote!</button>
     
+
     <!-- Content -->
     <div id = "content">
         <!-- Video -->
@@ -90,6 +96,10 @@
         background-color: white;
         padding: 1em 2em 2em 2em;
         max-width: 800px;
+        transition: 0.25s;
+    }
+    #box:hover {
+        cursor: pointer;
     }
 
     

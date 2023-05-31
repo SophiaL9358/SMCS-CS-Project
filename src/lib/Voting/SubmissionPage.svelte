@@ -40,6 +40,15 @@
     }
     async function submitVote(){
         if (confirm("Are you sure you want to submit your vote? \nYou cannot change your vote after you submit!")){
+            // Check if they've already voted (you sneaky fox)
+            var firebaseVotedCallback = getDoc(doc(db, "Students Voted/"+$user.ID));
+            var fbVotedResponse = (await firebaseVotedCallback).data()
+            if (fbVotedResponse != undefined){
+                alert("You have already voted.\nRedirecting back to Sign In page...");
+                resetUser();
+                return;
+            }
+
             // RECORD USERS VOTE
             // i = election #
             // j = officer position #

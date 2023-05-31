@@ -48,7 +48,7 @@
   {:else if $user.voted} <!-- Shows if vote is submitted and is being processed -->
     <div class = "center-parent-container"><br><div class = "prompt">
     Your vote is being processed! 
-    <br> <b class = "red">Please do not close the page yet!</b>
+    <br> <b class = "red">Please do not close the page yet, or else your vote may not be recorded correctly.</b>
     </div></div>
 
  {:else if !$user.loggedIn} <!-- LOGIN page -->

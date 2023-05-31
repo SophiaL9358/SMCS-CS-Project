@@ -1,7 +1,7 @@
 <script>
     import StudentVue from 'studentvue';
     import { user, sidebar_width_em, updateSize, db, candidate_selections } from '../constants.js';
-    import {collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+    import {Firestore, collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
     import { construct_svelte_component } from 'svelte/internal';
 
     let idInput; // ID textbox
@@ -21,6 +21,7 @@
             
             // Get firestore data for the PHS ID
             var firebaseVotedCallback = getDoc(doc(db, "Students Voted/"+idInput.value));
+            
             var fbVotedResponse = (await firebaseVotedCallback).data()
             
 
