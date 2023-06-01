@@ -34,7 +34,7 @@
     // Change highlighted sidebar box when scrolling past a position
     window.addEventListener("scroll", function() {
         let elementTarget = document.getElementById(position);
-        if (elementTarget != null && window.scrollY > (elementTarget.offsetTop + elementTarget.offsetHeight-50)) {
+        if (elementTarget != null && window.scrollY > (elementTarget.offsetTop + elementTarget.offsetHeight-20)) {
             user.update(state => ({...state, 
                 officerOn: position}));
         }
@@ -44,6 +44,7 @@
 
 <div id = {position}></div> <!-- For sidebar to jump to -->
 
+<br><br><br>
 <Subtitle text = {position} />
 {#await electionInfo}
     <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->

@@ -61,11 +61,11 @@
 <div id = "box" bind:this = {box} on:click = {handleVoteClick}>
     <!-- Candidate name -->
     <h3 style = "display: inline-block;">{candidate.name}</h3> 
-    <h4 style = "display: inline-block;">(Running for:  {candPosition})</h4>
+    <h4 style = "display: inline-block;">({candPosition})</h4>
 
     <!-- Vote button -->
-    <button bind:this = {button} style = "float: right; display: inline-block; width: 10em;">Click Anywhere to Vote!</button>
-    
+   <button bind:this = {button} style = "float: right; display: inline-block; width: 10em;">Click Anywhere to Vote!</button>
+
 
     <!-- Content -->
     <div id = "content">
@@ -96,10 +96,13 @@
         background-color: white;
         padding: 1em 2em 2em 2em;
         max-width: 800px;
-        transition: 0.25s;
+        transition: 0.3s;
     }
     #box:hover {
         cursor: pointer;
+        outline-color: rgba(51, 154, 80, 0.9);
+        outline-width: 0.3em;
+        outline-style: solid;
     }
 
     
