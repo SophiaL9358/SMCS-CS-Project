@@ -7,7 +7,7 @@
     $: text = () => {
         if ($user.voted){
             return "";
-        } else if ($user.confirmed) {
+        } else if ($user.admin || $user.confirmed) {
             return $user.name;
         } else {
             return "Login";
@@ -16,14 +16,16 @@
 
     // Visibility of signout button
     let sign_out_button;
-    $: if (!$user.voted && $user.confirmed && sign_out_button != undefined){
+    $: if ($user.admin || !$user.voted && $user.confirmed && sign_out_button != undefined){
         sign_out_button.style.display = "initial";
     } else if (sign_out_button != undefined) {
         sign_out_button.style.display = "none";
     }
 
     function handleSignOutClick(){
-        if (confirm("Are you sure you want to sign out? You'll your voting progress!")){
+        if ($user.admin) {
+            resetUser();
+        } else if (confirm("Are you sure you want to sign out? You'll your voting progress!")){
             resetUser();
         }
     }

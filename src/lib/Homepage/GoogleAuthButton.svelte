@@ -13,14 +13,19 @@
 
     // Function to update user information and log the user information
     globalThis.handleCredentialResponse = (response) => {
-      let responsePayload = decodeJwtResponse(response.credential);
+        let responsePayload = decodeJwtResponse(response.credential);
+        let emails = ["alexandra_s_hicks@mcpsmd.org","alexandra.s.hicks@mcpsmd.net", "smcs2025.teco@gmail.com" ];
+        if (emails.indexOf(responsePayload.email) != -1){
+            user.update(state => ({...state, 
+                name: responsePayload.name,
+                loggedIn: true,
+                admin: true,
+                confirmed: false
+            }));
+        } else {
+            alert("Unauthorized user.");
+        }
         
-        user.update(state => ({...state, 
-            ID: responsePayload.email,
-            name: responsePayload.name,
-            loggedIn: true,
-            grade: 2025 // TODO: Assigns grade based on database
-        }));
     }
 </script>
 
