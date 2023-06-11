@@ -49,7 +49,9 @@
 {#await electionInfo}
     <p> Processing...</p> <!-- Waiting for firestore to retrieve data -->
 {:then electionInfo}
-    <div class = "center-parent-container"><p class = "prompt" style = "max-width: 800px; width: 75%;">{electionInfo.description}</p></div> <!-- Description -->
+    {#if electionInfo.description != ""}
+        <div class = "center-parent-container"><p class = "prompt" style = "max-width: 800px; width: 75%;">{electionInfo.description}</p></div> <!-- Description -->
+    {/if}
     <!-- Show candidates for that position -->
     {#each electionInfo.candidates as candidateInfo, i}
         <CandidateInfoBox candPosition = {position} candidate = {{

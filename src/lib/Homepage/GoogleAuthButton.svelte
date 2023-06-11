@@ -14,7 +14,7 @@
     // Function to update user information and log the user information
     globalThis.handleCredentialResponse = (response) => {
         let responsePayload = decodeJwtResponse(response.credential);
-        let emails = ["alexandra_s_hicks@mcpsmd.org","alexandra.s.hicks@mcpsmd.net", "smcs2025.teco@gmail.com" ];
+        let emails = ["alexandra_s_hicks@mcpsmd.org","alexandra.s.hicks@mcpsmd.net", "smcs2025.teco@gmail.com", "Mark_R_Estep@mcpsmd.org", "mark.r.estep@mcpsmd.net"];
         if (emails.indexOf(responsePayload.email) != -1){
             user.update(state => ({...state, 
                 name: responsePayload.name,
