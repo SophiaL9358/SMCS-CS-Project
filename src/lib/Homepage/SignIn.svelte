@@ -18,6 +18,8 @@
         try {
             // Verify if user exists in StudentVUE
             let response = await StudentVue.login(DISTRICT_URL, { username: idInput.value, password: passwordInput.value });
+            let stuName = (await response.studentInfo()).student.name;
+            let stuGrade = (await response.studentInfo()).grade;
             
             // Get firestore data for the PHS ID
             var firebaseVotedCallback = getDoc(doc(db, "Students Voted/"+idInput.value));
@@ -37,21 +39,21 @@
                 warning = "You have already voted!";
             }else {
                 // Get firestore data for the elections they're supposed to do
-                var firebaseElectionCallback = getDoc(doc(db, "General Information/"+ fbIDResponse.grade));
+                var firebaseElectionCallback = getDoc(doc(db, "General Information/"+ stuGrade));
                 var fbElectionResponse = (await firebaseElectionCallback).data();
 
                 if (fbElectionResponse == undefined) { // If there's no elections available for user
                     document.getElementById("warning").style.color = "red";
-                    warning = "No elections available for Grade " + fbIDResponse.grade+"!";
+                    warning = "No elections available for Grade " + stuGrade+"!";
                 
                 } else { // Occurs when ID is in MCPS and PHS are verified
                     // Update user with new info
                     user.update(state => ({...state, 
                         ID: idInput.value,
-                        name: fbIDResponse.first_name + " "+fbIDResponse.last_name,
+                        name: stuName,
                         loggedIn: true,
                         confirmed: false,
-                        grade: fbIDResponse.grade,
+                        grade: stuGrade,
                         elections: fbElectionResponse.available_elections,
                         pageOn: 0,
                         officerOn: "President"
@@ -85,6 +87,8 @@
             // Reset other variables
             response = null;
             fbIDResponse = null;
+            stuName = null;
+            stuGrade = null;
             fbElectionResponse = null;
         } catch {
             // If StudentVUE returns an error
