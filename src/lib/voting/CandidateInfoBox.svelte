@@ -60,13 +60,12 @@
     onMount(updateSize);
 
     window.addEventListener("resize", updateSize);
-    let showButton = false;
     function updateSize() {
         let windowWidth = window.innerWidth;
         if (windowWidth < 750){ // Hide sidebar if window width less than 800 px
-            showButton = false;
+            button.style.display = "none";
         } else {
-            showButton = true;
+            button.style.display = "initial";
         }
     }
 
@@ -79,9 +78,7 @@
     <h4 style = "display: inline-block;">({candPosition})</h4>
 
     <!-- Vote button -->
-    {#if showButton}
    <button bind:this = {button} style = "float: right; display: inline-block; width: 10em;">Click Anywhere to Vote!</button>
-    {/if}
 
     <!-- Content -->
     <div id = "content">
