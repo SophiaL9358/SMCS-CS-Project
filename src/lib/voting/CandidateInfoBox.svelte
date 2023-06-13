@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import { user, db, candidate_selections, button_change, green_color } from "../constants";
 
     let button; // Vote button
@@ -55,6 +56,20 @@
         button_change.update(state => ({... state, change: ($button_change.change +=1)%10}));       
 
     }
+
+    onMount(updateSize);
+
+    window.addEventListener("resize", updateSize);
+    let showButton = false;
+    function updateSize() {
+        let windowWidth = window.innerWidth;
+        if (windowWidth < 750){ // Hide sidebar if window width less than 800 px
+            showButton = false;
+        } else {
+            showButton = true;
+        }
+    }
+
 </script>
 <div class = "center-parent-container">
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -64,8 +79,9 @@
     <h4 style = "display: inline-block;">({candPosition})</h4>
 
     <!-- Vote button -->
+    {#if showButton}
    <button bind:this = {button} style = "float: right; display: inline-block; width: 10em;">Click Anywhere to Vote!</button>
-
+    {/if}
 
     <!-- Content -->
     <div id = "content">
